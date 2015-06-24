@@ -1,0 +1,14 @@
+<head>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/rle.js"></script>
+<script type="text/javascript" src="/mstsc.js"></script>
+<script language="javascript">
+	function load() {
+		Mstsc.create(document.getElementById("myCanvas")).connect();
+	}
+</script>
+</head>
+<body onload = load()>
+Welcome to mstsc.js
+<canvas id="myCanvas" width="1024" height="768" style="border:1px solid #d3d3d3;">
+</body>
