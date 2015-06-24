@@ -35,27 +35,30 @@
 		},
 		
 		update : function(bitmap) {
-			//console.log('receive bitmap width : ' + bitmap.width + ' height : ' + bitmap.height);
-			var output = new Uint8Array(bitmap.width * bitmap.height * 4);
+			console.log('receive bitmap width : ' + bitmap.width + ' height : ' + bitmap.height);
+			
 			var input = new Uint8Array(bitmap.data);
-//            var res = Module.ccall('bitmap_decompress',
-//            		'number',
-//            		['array', 'number', 'number', 'number', 'array', 'number'],
-//            		[output, bitmap.width, bitmap.height, input, input.length, 2]
-//            );
-			var res = Module._bitmap_decompress(output, bitmap.width, bitmap.height, input, input.length, 2);
-            console.log(output);
-            var imageData = this.ctx.createImageData(bitmap.width, bitmap.height);
-            imageData.data = output;
-            this.ctx.putImageData(imageData, 0, 0);
-            
-//			var blob = new Blob([ouput], {type: 'image/jpeg'});
-//			var img = new Image();
-//			img.src = (window.URL).createObjectURL(blob);
-//			var self = this;
-//			img.onload = function() {
-//				console.log('toto');
-//			}
+			var inputPtr = Module._malloc(input.length);
+			var inputHeap = new Uint8Array(Module.HEAPU8.buffer, inputPtr, input.length);
+			inputHeap.set(input);
+			
+			var ouputSize = bitmap.width * bitmap.height * 4;
+			var outputPtr = Module._malloc(ouputSize);
+
+			var outputHeap = new Uint8Array(Module.HEAPU8.buffer, outputPtr, ouputSize);
+
+
+			var res = Module.ccall('bitmap_decompress',
+				'number',
+				['number', 'number', 'number', 'number', 'number', 'number'],
+				[outputHeap.byteOffset, bitmap.width, bitmap.height, inputHeap.byteOffset, input.length, 2]
+			);
+			var output = new Uint8ClampedArray(outputHeap.buffer, outputHeap.byteOffset, ouputSize);
+
+			var imageData = this.ctx.createImageData(bitmap.width, bitmap.height);
+			imageData.data = output;
+			this.ctx.putImageData(imageData, bitmap.destLeft, bitmap.destTop);
+          
 		}
 	}
 	
