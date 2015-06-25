@@ -38,7 +38,7 @@
 		},
 		
 		update : function(bitmap) {
-			console.log('receive bitmap width : ' + bitmap.width + ' height : ' + bitmap.height);
+			console.log('receive bitmap isCompress : ' + bitmap.isCompress);
 			
 			var input = new Uint8Array(bitmap.data);
 			var inputPtr = Module._malloc(input.length);
@@ -56,8 +56,8 @@
 				['number', 'number', 'number', 'number', 'number', 'number'],
 				[outputHeap.byteOffset, bitmap.width, bitmap.height, inputHeap.byteOffset, input.length, 2]
 			);
+			console.log(res);
 			var output = new Uint8ClampedArray(outputHeap.buffer, outputHeap.byteOffset, ouputSize);
-
 			var imageData = this.ctx.createImageData(bitmap.width, bitmap.height);
 			imageData.data.set(output);
 			this.ctx.putImageData(imageData, bitmap.destLeft, bitmap.destTop);
