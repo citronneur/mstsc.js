@@ -28,9 +28,12 @@
 			var self = this;
 			var socket = io('http://localhost:3000');
 			socket.on('connect', function() {
-				console.log('rdp client connected');
+				console.log('[mstsc.js] connected');
 			}).on('bitmap', function(bitmap) {
 				self.update(bitmap);
+			}).on('close', function() {
+				console.log('[mstsc.js] close')
+				socket.disconnect();
 			});
 		},
 		
@@ -56,9 +59,11 @@
 			var output = new Uint8ClampedArray(outputHeap.buffer, outputHeap.byteOffset, ouputSize);
 
 			var imageData = this.ctx.createImageData(bitmap.width, bitmap.height);
-			imageData.data = output;
+			imageData.data.set(output);
 			this.ctx.putImageData(imageData, bitmap.destLeft, bitmap.destTop);
-          
+			
+			Module._free(inputPtr);
+			Module._free(outputPtr);
 		}
 	}
 	
