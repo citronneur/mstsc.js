@@ -3,12 +3,23 @@
 <script type="text/javascript" src="/rle.js"></script>
 <script type="text/javascript" src="/mstsc.js"></script>
 <script language="javascript">
-	function load() {
-		Mstsc.create(document.getElementById("myCanvas")).connect();
+	function connect(ip, domain, username, password) {
+		Mstsc.create(document.getElementById("myCanvas")).connect(ip, domain, username, password);
 	}
 </script>
 </head>
-<body onload = load()>
+<body>
 Welcome to mstsc.js
+ <form onSubmit="connect(this.elements['ip'].value, this.elements['domain'].value, this.elements['username'].value, this.elements['password'].value);return false;">
+ip<br>
+<input type="text" name="ip">
+<br>domain
+<input type="text" name="domain">
+<br>username
+<input type="text" name="username">
+<br>password
+<input type="text" name="password">
+<input type="submit" value="connect">
+</form> 
 <canvas id="myCanvas" width="1280" height="1000" style="border:1px solid #d3d3d3;">
 </body>
