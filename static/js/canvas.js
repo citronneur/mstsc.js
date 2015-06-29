@@ -19,17 +19,12 @@
 
 (function() {
 
-	function WebGl(canvas) {
+	function Canvas(canvas) {
 		this.canvas = canvas;
-		//this.ctx = canvas.getContext("2d");
-		this.gl = canvas.getContext("webgl");
+		this.ctx = canvas.getContext("2d");
 	}
 	
-	WebGl.prototype = {
-		addEventListener : function(name, next) {
-			this.canvas.addEventListener(name, next);
-		},
-		
+	Canvas.prototype = {
 		update : function(bitmap) {
 			var input = new Uint8Array(bitmap.data);
 			var inputPtr = Module._malloc(input.length);
@@ -47,35 +42,19 @@
 				['number', 'number', 'number', 'number', 'number', 'number'],
 				[outputHeap.byteOffset, bitmap.width, bitmap.height, inputHeap.byteOffset, input.length, 2]
 			);
-			var output = new Uint8Array(outputHeap.buffer, outputHeap.byteOffset, ouputSize);
+			var output = new Uint8ClampedArray(outputHeap.buffer, outputHeap.byteOffset, ouputSize);
+			var imageData = this.ctx.createImageData(bitmap.width, bitmap.height);
+			imageData.data.set(output);
+			this.ctx.putImageData(imageData, bitmap.destLeft, bitmap.destTop);
 			
 			Module._free(inputPtr);
 			Module._free(outputPtr);
-			
-			// Create a texture object that will contain the image.
-			var texture = this.gl.createTexture();
-
-			// Bind the texture the target (TEXTURE_2D) of the active texture unit.
-			this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
-
-			// Flip the image's Y axis to match the WebGL texture coordinate space.
-			this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, true);
-			    
-			// Set the parameters so we can render any size image.        
-			this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE); 
-			this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
-			this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
-			this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
-
-			  // Upload the resized canvas image into the texture.
-//			    Note: a canvas is used here but can be replaced by an image object. 
-			this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, output);
 		}
 	}
 	
-	Mstsc.WebGl = {
+	Mstsc.Canvas = {
 		create : function (canvas) {
-			return new WebGl(canvas);
+			return new Canvas(canvas);
 		}
 	}
 })();

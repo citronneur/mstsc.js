@@ -29,34 +29,38 @@
 		}
 	};
 	
-	function Client(render) {
-		this.render = render; 
+	function Client(canvas) {
+		this.canvas = canvas;
+		this.render = new Mstsc.Canvas.create(this.canvas); 
 		
 		this.socket = null;
 		
 		var self = this;
 		
 		// bind mouse move event
-		this.render.addEventListener('mousemove', function (e) {
+		this.canvas.addEventListener('mousemove', function (e) {
 			if (!self.socket) {
 				return;
 			}
-			self.socket.emit('mouse', e.clientX, e.clientY, 0, false);
+			var offset = Mstsc.getOffset(self.canvas);
+			self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, 0, false);
 		});
 		
-		this.render.addEventListener('mousedown', function (e) {
+		this.canvas.addEventListener('mousedown', function (e) {
 			if (!self.socket) {
 				return;
 			}
-			self.socket.emit('mouse', e.clientX, e.clientY, mouseButtonMap(e.button), true);
+			var offset = Mstsc.getOffset(self.canvas);
+			self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), true);
 			e.preventDefault();
 		});
 		
-		this.render.addEventListener('mouseup', function (e) {
+		this.canvas.addEventListener('mouseup', function (e) {
 			if (!self.socket) {
 				return;
 			}
-			self.socket.emit('mouse', e.clientX, e.clientY, mouseButtonMap(e.button), false);
+			var offset = Mstsc.getOffset(self.canvas);
+			self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), false);
 			e.preventDefault();
 		});
 		
@@ -87,7 +91,7 @@
 			}).on('error', function (err) {
 				console.log('[mstsc.js] error : ' + err.code + '(' + err.message + ')');
 			});
-			this.socket.emit('infos', {ip : ip, port : 3389, domain : domain, username : username, password : password});
+			this.socket.emit('infos', {ip : ip, port : 3389, screen : { width : this.canvas.width, height : this.canvas.height }, domain : domain, username : username, password : password});
 		}
 	}
 	
