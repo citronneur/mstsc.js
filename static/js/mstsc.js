@@ -23,6 +23,9 @@
 	}
 	
 	Mstsc.prototype = {
+		$ : function (id) {
+			return document.getElementById(id);
+		},
 		getOffset : function (el) {
 		    var x = 0;
 		    var y = 0;

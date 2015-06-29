@@ -23,9 +23,15 @@
 	<script type="text/javascript" src="/js/canvas.js"></script>
     <script language="javascript">
 	function connect(ip, domain, username, password) {
-		document.getElementById("main").style = 'display:none';
-		document.getElementById("myCanvas").style.display = 'inline';
-		Mstsc.client.create(document.getElementById("myCanvas")).connect(ip, domain, username, password);
+		Mstsc.$("main").style.display = 'none';
+		var canvas = Mstsc.$("myCanvas");
+		canvas.style.display = 'inline';
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+		Mstsc.client.create(canvas).connect(ip, domain, username, password, function (err) {
+			Mstsc.$("myCanvas").style.display = 'none';
+			Mstsc.$("main").style.display = 'inline';
+		});
 	}
 </script>
   </head>
@@ -38,19 +44,16 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputIpAddress" class="sr-only">IP Address</label>
         <input type="text" id="inputIpAddress" class="form-control" placeholder="IP Address" required autofocus>
-        
         <label for="inputDomain" class="sr-only">Domain</label>
         <input type="text" id="inputDomain" class="form-control" placeholder="Domain">
-        
         <label for="inputUsername" class="sr-only">Username</label>
-        <input type="password" id="inputUsername" class="form-control" placeholder="Username">
-        
+        <input type="text" id="inputUsername" class="form-control" placeholder="Username">
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password">
         
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
     </div> <!-- /container -->
-    <canvas id="myCanvas" width="1280" height="1000" style="border:1px solid #d3d3d3;display:none">
+    <canvas id="myCanvas" style="border:1px solid #d3d3d3;display:none">
   </body>
 </html>
