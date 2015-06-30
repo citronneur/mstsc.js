@@ -1,5 +1,6 @@
 body {
   background-color: #eee;
+  overflow:hidden;
 }
 
 .form-signin {

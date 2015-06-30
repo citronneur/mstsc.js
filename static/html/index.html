@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Mstsc.js</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="/js/client.js"></script>
 	<script type="text/javascript" src="/js/canvas.js"></script>
     <script language="javascript">
-	function connect(ip, domain, username, password) {
+	function start(ip, domain, username, password) {
 		Mstsc.$("main").style.display = 'none';
 		var canvas = Mstsc.$("myCanvas");
 		canvas.style.display = 'inline';
@@ -40,8 +40,8 @@
 
     <div id="main" class="container">
 
-      <form class="form-signin"  onSubmit="connect(this.elements['inputIpAddress'].value, this.elements['inputDomain'].value, this.elements['inputUsername'].value, this.elements['inputPassword'].value);return false;">
-        <h2 class="form-signin-heading">Please sign in</h2>
+      <form class="form-signin"  onSubmit="start(this.elements['inputIpAddress'].value, this.elements['inputDomain'].value, this.elements['inputUsername'].value, this.elements['inputPassword'].value);return false;">
+        <h2 class="form-signin-heading">Mstsc.js</h2>
         <label for="inputIpAddress" class="sr-only">IP Address</label>
         <input type="text" id="inputIpAddress" class="form-control" placeholder="IP Address" required autofocus>
         <label for="inputDomain" class="sr-only">Domain</label>
@@ -51,7 +51,7 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password">
         
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Connect</button>
       </form>
     </div> <!-- /container -->
     <canvas id="myCanvas" style="border:1px solid #d3d3d3;display:none">

@@ -220,14 +220,25 @@
 			if (!self.socket) {
 				return;
 			}
-			self.socket.emit('key', keyMap[e.code], true);
+			if (e.code) {
+				self.socket.emit('scancode', keyMap[e.code], true);
+			}
+			else {
+				self.socket.emit('unicode', e.keyCode, true);
+			}
+			
 		});
 		
 		window.addEventListener('keyup', function (e) {
 			if (!self.socket) {
 				return;
 			}
-			self.socket.emit('key', keyMap[e.code], false);
+			if (e.code) {
+				self.socket.emit('scancode', keyMap[e.code], false);
+			}
+			else {
+				self.socket.emit('unicode', e.keyCode, false);
+			}
 		});
 	}
 	
