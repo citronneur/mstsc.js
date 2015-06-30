@@ -4474,7 +4474,7 @@ var FUNCTION_TABLE = [0, 0];
 
 // EMSCRIPTEN_START_FUNCS
 
-function _bitmap_decompress($output,$width,$height,$input,$size,$Bpp){
+function _bitmap_decompress_15($output,$width,$height,$input,$size){
  var label=0;
  var sp=STACKTOP; (assert((STACKTOP|0) < (STACK_MAX|0))|0);
  label = 1; 
@@ -4485,9 +4485,8 @@ function _bitmap_decompress($output,$width,$height,$input,$size,$Bpp){
  var $3;
  var $4;
  var $5;
- var $6;
- var $rv;
  var $temp;
+ var $rv;
  var $i;
  var $a;
  var $r;
@@ -4498,3182 +4497,112 @@ function _bitmap_decompress($output,$width,$height,$input,$size,$Bpp){
  $3=$height;
  $4=$input;
  $5=$size;
- $6=$Bpp;
- $rv=0;
- var $7=$2;
- var $8=$3;
- var $9=(Math_imul($7,$8)|0);
- var $10=$6;
- var $11=(Math_imul($9,$10)|0);
- var $12=_malloc($11);
- $temp=$12;
- var $13=$6;
- if(($13|0)==1){ label=2;break;}else if(($13|0)==2){ label=3;break;}else if(($13|0)==3){ label=8;break;}else if(($13|0)==4){ label=9;break;}else{label=10;break;}
- case 2: 
- var $15=$temp;
- var $16=$2;
- var $17=$3;
- var $18=$4;
- var $19=$5;
- var $20=_bitmap_decompress1($15,$16,$17,$18,$19);
- $rv=$20;
- label=11;break;
- case 3: 
- var $22=$temp;
- var $23=$2;
- var $24=$3;
- var $25=$4;
- var $26=$5;
- var $27=_bitmap_decompress2($22,$23,$24,$25,$26);
- $rv=$27;
+ var $6=$2;
+ var $7=$3;
+ var $8=(Math_imul($6,$7)|0);
+ var $9=($8<<1);
+ var $10=_malloc($9);
+ $temp=$10;
+ var $11=$temp;
+ var $12=$2;
+ var $13=$3;
+ var $14=$4;
+ var $15=$5;
+ var $16=_bitmap_decompress2($11,$12,$13,$14,$15);
+ $rv=$16;
  $i=0;
- label=4;break;
- case 4: 
- var $29=$i;
- var $30=$2;
- var $31=$3;
- var $32=(Math_imul($30,$31)|0);
- var $33=($29|0)<($32|0);
- if($33){label=5;break;}else{label=7;break;}
- case 5: 
- var $35=$i;
- var $36=$temp;
- var $37=$36;
- var $38=(($37+($35<<1))|0);
- var $39=HEAP16[(($38)>>1)];
- $a=$39;
- var $40=$a;
- var $41=($40&65535);
- var $42=$41&63488;
- var $43=$42>>11;
- var $44=(($43)&255);
- $r=$44;
- var $45=$a;
- var $46=($45&65535);
- var $47=$46&2016;
- var $48=$47>>5;
- var $49=(($48)&255);
- $g=$49;
- var $50=$a;
- var $51=($50&65535);
- var $52=$51&31;
- var $53=(($52)&255);
- $b=$53;
- var $54=$r;
- var $55=($54&255);
- var $56=((($55)*(255))&-1);
- var $57=(((($56|0))/(31))&-1);
- var $58=(($57)&255);
- $r=$58;
- var $59=$g;
- var $60=($59&255);
- var $61=((($60)*(255))&-1);
- var $62=(((($61|0))/(63))&-1);
- var $63=(($62)&255);
- $g=$63;
- var $64=$b;
- var $65=($64&255);
- var $66=((($65)*(255))&-1);
- var $67=(((($66|0))/(31))&-1);
- var $68=(($67)&255);
- $b=$68;
- var $69=$r;
+ label=2;break;
+ case 2: 
+ var $18=$i;
+ var $19=$2;
+ var $20=$3;
+ var $21=(Math_imul($19,$20)|0);
+ var $22=($18|0)<($21|0);
+ if($22){label=3;break;}else{label=5;break;}
+ case 3: 
+ var $24=$i;
+ var $25=$temp;
+ var $26=$25;
+ var $27=(($26+($24<<1))|0);
+ var $28=HEAP16[(($27)>>1)];
+ $a=$28;
+ var $29=$a;
+ var $30=($29&65535);
+ var $31=$30&31744;
+ var $32=$31>>10;
+ var $33=(($32)&255);
+ $r=$33;
+ var $34=$a;
+ var $35=($34&65535);
+ var $36=$35&992;
+ var $37=$36>>5;
+ var $38=(($37)&255);
+ $g=$38;
+ var $39=$a;
+ var $40=($39&65535);
+ var $41=$40&31;
+ var $42=(($41)&255);
+ $b=$42;
+ var $43=$r;
+ var $44=($43&255);
+ var $45=((($44)*(255))&-1);
+ var $46=(((($45|0))/(31))&-1);
+ var $47=(($46)&255);
+ $r=$47;
+ var $48=$g;
+ var $49=($48&255);
+ var $50=((($49)*(255))&-1);
+ var $51=(((($50|0))/(31))&-1);
+ var $52=(($51)&255);
+ $g=$52;
+ var $53=$b;
+ var $54=($53&255);
+ var $55=((($54)*(255))&-1);
+ var $56=(((($55|0))/(31))&-1);
+ var $57=(($56)&255);
+ $b=$57;
+ var $58=$r;
+ var $59=$i;
+ var $60=($59<<2);
+ var $61=$1;
+ var $62=(($61+$60)|0);
+ HEAP8[($62)]=$58;
+ var $63=$g;
+ var $64=$i;
+ var $65=($64<<2);
+ var $66=((($65)+(1))|0);
+ var $67=$1;
+ var $68=(($67+$66)|0);
+ HEAP8[($68)]=$63;
+ var $69=$b;
  var $70=$i;
  var $71=($70<<2);
- var $72=$1;
- var $73=(($72+$71)|0);
- HEAP8[($73)]=$69;
- var $74=$g;
+ var $72=((($71)+(2))|0);
+ var $73=$1;
+ var $74=(($73+$72)|0);
+ HEAP8[($74)]=$69;
  var $75=$i;
  var $76=($75<<2);
- var $77=((($76)+(1))|0);
+ var $77=((($76)+(3))|0);
  var $78=$1;
  var $79=(($78+$77)|0);
- HEAP8[($79)]=$74;
- var $80=$b;
- var $81=$i;
- var $82=($81<<2);
- var $83=((($82)+(2))|0);
- var $84=$1;
- var $85=(($84+$83)|0);
- HEAP8[($85)]=$80;
- var $86=$i;
- var $87=($86<<2);
- var $88=((($87)+(3))|0);
- var $89=$1;
- var $90=(($89+$88)|0);
- HEAP8[($90)]=-1;
- label=6;break;
- case 6: 
- var $92=$i;
- var $93=((($92)+(1))|0);
- $i=$93;
+ HEAP8[($79)]=-1;
  label=4;break;
- case 7: 
- label=11;break;
- case 8: 
- var $96=$temp;
- var $97=$2;
- var $98=$3;
- var $99=$4;
- var $100=$5;
- var $101=_bitmap_decompress3($96,$97,$98,$99,$100);
- $rv=$101;
- label=11;break;
- case 9: 
- var $103=$temp;
- var $104=$2;
- var $105=$3;
- var $106=$4;
- var $107=$5;
- var $108=_bitmap_decompress4($103,$104,$105,$106,$107);
- $rv=$108;
- label=11;break;
- case 10: 
- label=11;break;
- case 11: 
- var $111=$temp;
- _free($111);
- var $112=$rv;
- STACKTOP=sp;return $112;
-  default: assert(0, "bad label: " + label);
- }
-
-}
-Module["_bitmap_decompress"] = _bitmap_decompress;
-
-function _bitmap_decompress1($output,$width,$height,$input,$size){
- var label=0;
- var sp=STACKTOP; (assert((STACKTOP|0) < (STACK_MAX|0))|0);
- label = 1; 
- while(1)switch(label){
- case 1: 
- var $1;
- var $2;
- var $3;
- var $4;
- var $5;
- var $6;
- var $end;
- var $prevline;
- var $line;
- var $opcode;
- var $count;
- var $offset;
- var $isfillormix;
- var $x;
- var $lastopcode;
- var $insertmix;
- var $bicolour;
- var $code;
- var $colour1;
- var $colour2;
- var $mixmask;
- var $mask;
- var $mix;
- var $fom_mask;
- $2=$output;
- $3=$width;
- $4=$height;
- $5=$input;
- $6=$size;
- var $7=$5;
- var $8=$6;
- var $9=(($7+$8)|0);
- $end=$9;
- $prevline=0;
- $line=0;
- var $10=$3;
- $x=$10;
- $lastopcode=-1;
- $insertmix=0;
- $bicolour=0;
- $colour1=0;
- $colour2=0;
- $mask=0;
- $mix=-1;
- $fom_mask=0;
- label=2;break;
- case 2: 
- var $12=$5;
- var $13=$end;
- var $14=($12>>>0)<($13>>>0);
- if($14){label=3;break;}else{label=346;break;}
- case 3: 
- $fom_mask=0;
- var $16=$5;
- var $17=(($16+1)|0);
- $5=$17;
- var $18=HEAP8[($16)];
- $code=$18;
- var $19=$code;
- var $20=($19&255);
- var $21=$20>>4;
- $opcode=$21;
- var $22=$opcode;
- if(($22|0)==12|($22|0)==13|($22|0)==14){ label=4;break;}else if(($22|0)==15){ label=5;break;}else{label=9;break;}
  case 4: 
- var $24=$opcode;
- var $25=((($24)-(6))|0);
- $opcode=$25;
- var $26=$code;
- var $27=($26&255);
- var $28=$27&15;
- $count=$28;
- $offset=16;
- label=10;break;
- case 5: 
- var $30=$code;
- var $31=($30&255);
- var $32=$31&15;
- $opcode=$32;
- var $33=$opcode;
- var $34=($33|0)<9;
- if($34){label=6;break;}else{label=7;break;}
- case 6: 
- var $36=$5;
- var $37=(($36+1)|0);
- $5=$37;
- var $38=HEAP8[($36)];
- var $39=($38&255);
- $count=$39;
- var $40=$5;
- var $41=(($40+1)|0);
- $5=$41;
- var $42=HEAP8[($40)];
- var $43=($42&255);
- var $44=$43<<8;
- var $45=$count;
- var $46=$45|$44;
- $count=$46;
- label=8;break;
- case 7: 
- var $48=$opcode;
- var $49=($48|0)<11;
- var $50=($49?8:1);
- $count=$50;
- label=8;break;
- case 8: 
- $offset=0;
- label=10;break;
- case 9: 
- var $53=$opcode;
- var $54=$53>>1;
- $opcode=$54;
- var $55=$code;
- var $56=($55&255);
- var $57=$56&31;
- $count=$57;
- $offset=32;
- label=10;break;
- case 10: 
- var $59=$offset;
- var $60=($59|0)!=0;
- if($60){label=11;break;}else{label=22;break;}
- case 11: 
- var $62=$opcode;
- var $63=($62|0)==2;
- if($63){var $68=1;label=13;break;}else{label=12;break;}
- case 12: 
- var $65=$opcode;
- var $66=($65|0)==7;
- var $68=$66;label=13;break;
- case 13: 
- var $68;
- var $69=($68&1);
- $isfillormix=$69;
- var $70=$count;
- var $71=($70|0)==0;
- if($71){label=14;break;}else{label=18;break;}
- case 14: 
- var $73=$isfillormix;
- var $74=($73|0)!=0;
- if($74){label=15;break;}else{label=16;break;}
- case 15: 
- var $76=$5;
- var $77=(($76+1)|0);
- $5=$77;
- var $78=HEAP8[($76)];
- var $79=($78&255);
- var $80=((($79)+(1))|0);
- $count=$80;
- label=17;break;
- case 16: 
- var $82=$5;
- var $83=(($82+1)|0);
- $5=$83;
- var $84=HEAP8[($82)];
- var $85=($84&255);
- var $86=$offset;
- var $87=((($85)+($86))|0);
- $count=$87;
- label=17;break;
- case 17: 
- label=21;break;
- case 18: 
- var $90=$isfillormix;
- var $91=($90|0)!=0;
- if($91){label=19;break;}else{label=20;break;}
- case 19: 
- var $93=$count;
- var $94=$93<<3;
- $count=$94;
- label=20;break;
- case 20: 
- label=21;break;
- case 21: 
- label=22;break;
- case 22: 
- var $98=$opcode;
- switch(($98|0)){case 0:{ label=23;break;}case 8:{ label=28;break;}case 3:{ label=29;break;}case 6:case 7:{ label=30;break;}case 9:{ label=31;break;}case 10:{ label=32;break;}default:{label=33;break;}}break;
- case 23: 
- var $100=$lastopcode;
- var $101=$opcode;
- var $102=($100|0)==($101|0);
- if($102){label=24;break;}else{label=27;break;}
- case 24: 
- var $104=$x;
- var $105=$3;
- var $106=($104|0)==($105|0);
- if($106){label=25;break;}else{label=26;break;}
- case 25: 
- var $108=$prevline;
- var $109=($108|0)==0;
- if($109){label=27;break;}else{label=26;break;}
- case 26: 
- $insertmix=1;
- label=27;break;
- case 27: 
- label=33;break;
- case 28: 
- var $113=$5;
- var $114=(($113+1)|0);
- $5=$114;
- var $115=HEAP8[($113)];
- $colour1=$115;
- label=29;break;
- case 29: 
- var $117=$5;
- var $118=(($117+1)|0);
- $5=$118;
- var $119=HEAP8[($117)];
- $colour2=$119;
- label=33;break;
- case 30: 
- var $121=$5;
- var $122=(($121+1)|0);
- $5=$122;
- var $123=HEAP8[($121)];
- $mix=$123;
- var $124=$opcode;
- var $125=((($124)-(5))|0);
- $opcode=$125;
- label=33;break;
- case 31: 
- $mask=3;
- $opcode=2;
- $fom_mask=3;
- label=33;break;
- case 32: 
- $mask=5;
- $opcode=2;
- $fom_mask=5;
- label=33;break;
- case 33: 
- var $129=$opcode;
- $lastopcode=$129;
- $mixmask=0;
- label=34;break;
- case 34: 
- var $131=$count;
- var $132=($131|0)>0;
- if($132){label=35;break;}else{label=345;break;}
- case 35: 
- var $134=$x;
- var $135=$3;
- var $136=($134|0)>=($135|0);
- if($136){label=36;break;}else{label=39;break;}
- case 36: 
- var $138=$4;
- var $139=($138|0)<=0;
- if($139){label=37;break;}else{label=38;break;}
- case 37: 
- $1=0;
- label=347;break;
- case 38: 
- $x=0;
- var $142=$4;
- var $143=((($142)-(1))|0);
- $4=$143;
- var $144=$line;
- $prevline=$144;
- var $145=$2;
- var $146=$4;
- var $147=$3;
- var $148=(Math_imul($146,$147)|0);
- var $149=(($145+$148)|0);
- $line=$149;
- label=39;break;
- case 39: 
- var $151=$opcode;
- switch(($151|0)){case 3:{ label=261;break;}case 4:{ label=272;break;}case 8:{ label=283;break;}case 13:{ label=321;break;}case 14:{ label=332;break;}case 0:{ label=40;break;}case 1:{ label=69;break;}case 2:{ label=93;break;}default:{label=343;break;}}break;
- case 40: 
- var $153=$insertmix;
- var $154=($153|0)!=0;
- if($154){label=41;break;}else{label=45;break;}
- case 41: 
- var $156=$prevline;
- var $157=($156|0)==0;
- if($157){label=42;break;}else{label=43;break;}
- case 42: 
- var $159=$mix;
- var $160=$x;
- var $161=$line;
- var $162=(($161+$160)|0);
- HEAP8[($162)]=$159;
- label=44;break;
- case 43: 
- var $164=$x;
- var $165=$prevline;
- var $166=(($165+$164)|0);
- var $167=HEAP8[($166)];
- var $168=($167&255);
- var $169=$mix;
- var $170=($169&255);
- var $171=$168^$170;
- var $172=(($171)&255);
- var $173=$x;
- var $174=$line;
- var $175=(($174+$173)|0);
- HEAP8[($175)]=$172;
- label=44;break;
- case 44: 
- $insertmix=0;
- var $177=$count;
- var $178=((($177)-(1))|0);
- $count=$178;
- var $179=$x;
- var $180=((($179)+(1))|0);
- $x=$180;
- label=45;break;
- case 45: 
- var $182=$prevline;
- var $183=($182|0)==0;
- if($183){label=46;break;}else{label=57;break;}
- case 46: 
- label=47;break;
- case 47: 
- var $186=$count;
- var $187=$186&-8;
- var $188=($187|0)!=0;
- if($188){label=48;break;}else{var $195=0;label=49;break;}
- case 48: 
- var $190=$x;
- var $191=((($190)+(8))|0);
- var $192=$3;
- var $193=($191|0)<($192|0);
- var $195=$193;label=49;break;
- case 49: 
- var $195;
- if($195){label=50;break;}else{label=51;break;}
- case 50: 
- var $197=$x;
- var $198=$line;
- var $199=(($198+$197)|0);
- HEAP8[($199)]=0;
- var $200=$count;
- var $201=((($200)-(1))|0);
- $count=$201;
- var $202=$x;
- var $203=((($202)+(1))|0);
- $x=$203;
- var $204=$x;
- var $205=$line;
- var $206=(($205+$204)|0);
- HEAP8[($206)]=0;
- var $207=$count;
- var $208=((($207)-(1))|0);
- $count=$208;
- var $209=$x;
- var $210=((($209)+(1))|0);
- $x=$210;
- var $211=$x;
- var $212=$line;
- var $213=(($212+$211)|0);
- HEAP8[($213)]=0;
- var $214=$count;
- var $215=((($214)-(1))|0);
- $count=$215;
- var $216=$x;
- var $217=((($216)+(1))|0);
- $x=$217;
- var $218=$x;
- var $219=$line;
- var $220=(($219+$218)|0);
- HEAP8[($220)]=0;
- var $221=$count;
- var $222=((($221)-(1))|0);
- $count=$222;
- var $223=$x;
- var $224=((($223)+(1))|0);
- $x=$224;
- var $225=$x;
- var $226=$line;
- var $227=(($226+$225)|0);
- HEAP8[($227)]=0;
- var $228=$count;
- var $229=((($228)-(1))|0);
- $count=$229;
- var $230=$x;
- var $231=((($230)+(1))|0);
- $x=$231;
- var $232=$x;
- var $233=$line;
- var $234=(($233+$232)|0);
- HEAP8[($234)]=0;
- var $235=$count;
- var $236=((($235)-(1))|0);
- $count=$236;
- var $237=$x;
- var $238=((($237)+(1))|0);
- $x=$238;
- var $239=$x;
- var $240=$line;
- var $241=(($240+$239)|0);
- HEAP8[($241)]=0;
- var $242=$count;
- var $243=((($242)-(1))|0);
- $count=$243;
- var $244=$x;
- var $245=((($244)+(1))|0);
- $x=$245;
- var $246=$x;
- var $247=$line;
- var $248=(($247+$246)|0);
- HEAP8[($248)]=0;
- var $249=$count;
- var $250=((($249)-(1))|0);
- $count=$250;
- var $251=$x;
- var $252=((($251)+(1))|0);
- $x=$252;
- label=47;break;
- case 51: 
- label=52;break;
- case 52: 
- var $255=$count;
- var $256=($255|0)>0;
- if($256){label=53;break;}else{var $262=0;label=54;break;}
- case 53: 
- var $258=$x;
- var $259=$3;
- var $260=($258|0)<($259|0);
- var $262=$260;label=54;break;
- case 54: 
- var $262;
- if($262){label=55;break;}else{label=56;break;}
- case 55: 
- var $264=$x;
- var $265=$line;
- var $266=(($265+$264)|0);
- HEAP8[($266)]=0;
- var $267=$count;
- var $268=((($267)-(1))|0);
- $count=$268;
- var $269=$x;
- var $270=((($269)+(1))|0);
- $x=$270;
- label=52;break;
- case 56: 
- label=68;break;
- case 57: 
- label=58;break;
- case 58: 
- var $274=$count;
- var $275=$274&-8;
- var $276=($275|0)!=0;
- if($276){label=59;break;}else{var $283=0;label=60;break;}
- case 59: 
- var $278=$x;
- var $279=((($278)+(8))|0);
- var $280=$3;
- var $281=($279|0)<($280|0);
- var $283=$281;label=60;break;
- case 60: 
- var $283;
- if($283){label=61;break;}else{label=62;break;}
- case 61: 
- var $285=$x;
- var $286=$prevline;
- var $287=(($286+$285)|0);
- var $288=HEAP8[($287)];
- var $289=$x;
- var $290=$line;
- var $291=(($290+$289)|0);
- HEAP8[($291)]=$288;
- var $292=$count;
- var $293=((($292)-(1))|0);
- $count=$293;
- var $294=$x;
- var $295=((($294)+(1))|0);
- $x=$295;
- var $296=$x;
- var $297=$prevline;
- var $298=(($297+$296)|0);
- var $299=HEAP8[($298)];
- var $300=$x;
- var $301=$line;
- var $302=(($301+$300)|0);
- HEAP8[($302)]=$299;
- var $303=$count;
- var $304=((($303)-(1))|0);
- $count=$304;
- var $305=$x;
- var $306=((($305)+(1))|0);
- $x=$306;
- var $307=$x;
- var $308=$prevline;
- var $309=(($308+$307)|0);
- var $310=HEAP8[($309)];
- var $311=$x;
- var $312=$line;
- var $313=(($312+$311)|0);
- HEAP8[($313)]=$310;
- var $314=$count;
- var $315=((($314)-(1))|0);
- $count=$315;
- var $316=$x;
- var $317=((($316)+(1))|0);
- $x=$317;
- var $318=$x;
- var $319=$prevline;
- var $320=(($319+$318)|0);
- var $321=HEAP8[($320)];
- var $322=$x;
- var $323=$line;
- var $324=(($323+$322)|0);
- HEAP8[($324)]=$321;
- var $325=$count;
- var $326=((($325)-(1))|0);
- $count=$326;
- var $327=$x;
- var $328=((($327)+(1))|0);
- $x=$328;
- var $329=$x;
- var $330=$prevline;
- var $331=(($330+$329)|0);
- var $332=HEAP8[($331)];
- var $333=$x;
- var $334=$line;
- var $335=(($334+$333)|0);
- HEAP8[($335)]=$332;
- var $336=$count;
- var $337=((($336)-(1))|0);
- $count=$337;
- var $338=$x;
- var $339=((($338)+(1))|0);
- $x=$339;
- var $340=$x;
- var $341=$prevline;
- var $342=(($341+$340)|0);
- var $343=HEAP8[($342)];
- var $344=$x;
- var $345=$line;
- var $346=(($345+$344)|0);
- HEAP8[($346)]=$343;
- var $347=$count;
- var $348=((($347)-(1))|0);
- $count=$348;
- var $349=$x;
- var $350=((($349)+(1))|0);
- $x=$350;
- var $351=$x;
- var $352=$prevline;
- var $353=(($352+$351)|0);
- var $354=HEAP8[($353)];
- var $355=$x;
- var $356=$line;
- var $357=(($356+$355)|0);
- HEAP8[($357)]=$354;
- var $358=$count;
- var $359=((($358)-(1))|0);
- $count=$359;
- var $360=$x;
- var $361=((($360)+(1))|0);
- $x=$361;
- var $362=$x;
- var $363=$prevline;
- var $364=(($363+$362)|0);
- var $365=HEAP8[($364)];
- var $366=$x;
- var $367=$line;
- var $368=(($367+$366)|0);
- HEAP8[($368)]=$365;
- var $369=$count;
- var $370=((($369)-(1))|0);
- $count=$370;
- var $371=$x;
- var $372=((($371)+(1))|0);
- $x=$372;
- label=58;break;
- case 62: 
- label=63;break;
- case 63: 
- var $375=$count;
- var $376=($375|0)>0;
- if($376){label=64;break;}else{var $382=0;label=65;break;}
- case 64: 
- var $378=$x;
- var $379=$3;
- var $380=($378|0)<($379|0);
- var $382=$380;label=65;break;
- case 65: 
- var $382;
- if($382){label=66;break;}else{label=67;break;}
- case 66: 
- var $384=$x;
- var $385=$prevline;
- var $386=(($385+$384)|0);
- var $387=HEAP8[($386)];
- var $388=$x;
- var $389=$line;
- var $390=(($389+$388)|0);
- HEAP8[($390)]=$387;
- var $391=$count;
- var $392=((($391)-(1))|0);
- $count=$392;
- var $393=$x;
- var $394=((($393)+(1))|0);
- $x=$394;
- label=63;break;
- case 67: 
- label=68;break;
- case 68: 
- label=344;break;
- case 69: 
- var $398=$prevline;
- var $399=($398|0)==0;
- if($399){label=70;break;}else{label=81;break;}
- case 70: 
- label=71;break;
- case 71: 
- var $402=$count;
- var $403=$402&-8;
- var $404=($403|0)!=0;
- if($404){label=72;break;}else{var $411=0;label=73;break;}
- case 72: 
- var $406=$x;
- var $407=((($406)+(8))|0);
- var $408=$3;
- var $409=($407|0)<($408|0);
- var $411=$409;label=73;break;
- case 73: 
- var $411;
- if($411){label=74;break;}else{label=75;break;}
- case 74: 
- var $413=$mix;
- var $414=$x;
- var $415=$line;
- var $416=(($415+$414)|0);
- HEAP8[($416)]=$413;
- var $417=$count;
- var $418=((($417)-(1))|0);
- $count=$418;
- var $419=$x;
- var $420=((($419)+(1))|0);
- $x=$420;
- var $421=$mix;
- var $422=$x;
- var $423=$line;
- var $424=(($423+$422)|0);
- HEAP8[($424)]=$421;
- var $425=$count;
- var $426=((($425)-(1))|0);
- $count=$426;
- var $427=$x;
- var $428=((($427)+(1))|0);
- $x=$428;
- var $429=$mix;
- var $430=$x;
- var $431=$line;
- var $432=(($431+$430)|0);
- HEAP8[($432)]=$429;
- var $433=$count;
- var $434=((($433)-(1))|0);
- $count=$434;
- var $435=$x;
- var $436=((($435)+(1))|0);
- $x=$436;
- var $437=$mix;
- var $438=$x;
- var $439=$line;
- var $440=(($439+$438)|0);
- HEAP8[($440)]=$437;
- var $441=$count;
- var $442=((($441)-(1))|0);
- $count=$442;
- var $443=$x;
- var $444=((($443)+(1))|0);
- $x=$444;
- var $445=$mix;
- var $446=$x;
- var $447=$line;
- var $448=(($447+$446)|0);
- HEAP8[($448)]=$445;
- var $449=$count;
- var $450=((($449)-(1))|0);
- $count=$450;
- var $451=$x;
- var $452=((($451)+(1))|0);
- $x=$452;
- var $453=$mix;
- var $454=$x;
- var $455=$line;
- var $456=(($455+$454)|0);
- HEAP8[($456)]=$453;
- var $457=$count;
- var $458=((($457)-(1))|0);
- $count=$458;
- var $459=$x;
- var $460=((($459)+(1))|0);
- $x=$460;
- var $461=$mix;
- var $462=$x;
- var $463=$line;
- var $464=(($463+$462)|0);
- HEAP8[($464)]=$461;
- var $465=$count;
- var $466=((($465)-(1))|0);
- $count=$466;
- var $467=$x;
- var $468=((($467)+(1))|0);
- $x=$468;
- var $469=$mix;
- var $470=$x;
- var $471=$line;
- var $472=(($471+$470)|0);
- HEAP8[($472)]=$469;
- var $473=$count;
- var $474=((($473)-(1))|0);
- $count=$474;
- var $475=$x;
- var $476=((($475)+(1))|0);
- $x=$476;
- label=71;break;
- case 75: 
- label=76;break;
- case 76: 
- var $479=$count;
- var $480=($479|0)>0;
- if($480){label=77;break;}else{var $486=0;label=78;break;}
- case 77: 
- var $482=$x;
- var $483=$3;
- var $484=($482|0)<($483|0);
- var $486=$484;label=78;break;
- case 78: 
- var $486;
- if($486){label=79;break;}else{label=80;break;}
- case 79: 
- var $488=$mix;
- var $489=$x;
- var $490=$line;
- var $491=(($490+$489)|0);
- HEAP8[($491)]=$488;
- var $492=$count;
- var $493=((($492)-(1))|0);
- $count=$493;
- var $494=$x;
- var $495=((($494)+(1))|0);
- $x=$495;
- label=76;break;
- case 80: 
- label=92;break;
- case 81: 
- label=82;break;
- case 82: 
- var $499=$count;
- var $500=$499&-8;
- var $501=($500|0)!=0;
- if($501){label=83;break;}else{var $508=0;label=84;break;}
- case 83: 
- var $503=$x;
- var $504=((($503)+(8))|0);
- var $505=$3;
- var $506=($504|0)<($505|0);
- var $508=$506;label=84;break;
- case 84: 
- var $508;
- if($508){label=85;break;}else{label=86;break;}
- case 85: 
- var $510=$x;
- var $511=$prevline;
- var $512=(($511+$510)|0);
- var $513=HEAP8[($512)];
- var $514=($513&255);
- var $515=$mix;
- var $516=($515&255);
- var $517=$514^$516;
- var $518=(($517)&255);
- var $519=$x;
- var $520=$line;
- var $521=(($520+$519)|0);
- HEAP8[($521)]=$518;
- var $522=$count;
- var $523=((($522)-(1))|0);
- $count=$523;
- var $524=$x;
- var $525=((($524)+(1))|0);
- $x=$525;
- var $526=$x;
- var $527=$prevline;
- var $528=(($527+$526)|0);
- var $529=HEAP8[($528)];
- var $530=($529&255);
- var $531=$mix;
- var $532=($531&255);
- var $533=$530^$532;
- var $534=(($533)&255);
- var $535=$x;
- var $536=$line;
- var $537=(($536+$535)|0);
- HEAP8[($537)]=$534;
- var $538=$count;
- var $539=((($538)-(1))|0);
- $count=$539;
- var $540=$x;
- var $541=((($540)+(1))|0);
- $x=$541;
- var $542=$x;
- var $543=$prevline;
- var $544=(($543+$542)|0);
- var $545=HEAP8[($544)];
- var $546=($545&255);
- var $547=$mix;
- var $548=($547&255);
- var $549=$546^$548;
- var $550=(($549)&255);
- var $551=$x;
- var $552=$line;
- var $553=(($552+$551)|0);
- HEAP8[($553)]=$550;
- var $554=$count;
- var $555=((($554)-(1))|0);
- $count=$555;
- var $556=$x;
- var $557=((($556)+(1))|0);
- $x=$557;
- var $558=$x;
- var $559=$prevline;
- var $560=(($559+$558)|0);
- var $561=HEAP8[($560)];
- var $562=($561&255);
- var $563=$mix;
- var $564=($563&255);
- var $565=$562^$564;
- var $566=(($565)&255);
- var $567=$x;
- var $568=$line;
- var $569=(($568+$567)|0);
- HEAP8[($569)]=$566;
- var $570=$count;
- var $571=((($570)-(1))|0);
- $count=$571;
- var $572=$x;
- var $573=((($572)+(1))|0);
- $x=$573;
- var $574=$x;
- var $575=$prevline;
- var $576=(($575+$574)|0);
- var $577=HEAP8[($576)];
- var $578=($577&255);
- var $579=$mix;
- var $580=($579&255);
- var $581=$578^$580;
- var $582=(($581)&255);
- var $583=$x;
- var $584=$line;
- var $585=(($584+$583)|0);
- HEAP8[($585)]=$582;
- var $586=$count;
- var $587=((($586)-(1))|0);
- $count=$587;
- var $588=$x;
- var $589=((($588)+(1))|0);
- $x=$589;
- var $590=$x;
- var $591=$prevline;
- var $592=(($591+$590)|0);
- var $593=HEAP8[($592)];
- var $594=($593&255);
- var $595=$mix;
- var $596=($595&255);
- var $597=$594^$596;
- var $598=(($597)&255);
- var $599=$x;
- var $600=$line;
- var $601=(($600+$599)|0);
- HEAP8[($601)]=$598;
- var $602=$count;
- var $603=((($602)-(1))|0);
- $count=$603;
- var $604=$x;
- var $605=((($604)+(1))|0);
- $x=$605;
- var $606=$x;
- var $607=$prevline;
- var $608=(($607+$606)|0);
- var $609=HEAP8[($608)];
- var $610=($609&255);
- var $611=$mix;
- var $612=($611&255);
- var $613=$610^$612;
- var $614=(($613)&255);
- var $615=$x;
- var $616=$line;
- var $617=(($616+$615)|0);
- HEAP8[($617)]=$614;
- var $618=$count;
- var $619=((($618)-(1))|0);
- $count=$619;
- var $620=$x;
- var $621=((($620)+(1))|0);
- $x=$621;
- var $622=$x;
- var $623=$prevline;
- var $624=(($623+$622)|0);
- var $625=HEAP8[($624)];
- var $626=($625&255);
- var $627=$mix;
- var $628=($627&255);
- var $629=$626^$628;
- var $630=(($629)&255);
- var $631=$x;
- var $632=$line;
- var $633=(($632+$631)|0);
- HEAP8[($633)]=$630;
- var $634=$count;
- var $635=((($634)-(1))|0);
- $count=$635;
- var $636=$x;
- var $637=((($636)+(1))|0);
- $x=$637;
- label=82;break;
- case 86: 
- label=87;break;
- case 87: 
- var $640=$count;
- var $641=($640|0)>0;
- if($641){label=88;break;}else{var $647=0;label=89;break;}
- case 88: 
- var $643=$x;
- var $644=$3;
- var $645=($643|0)<($644|0);
- var $647=$645;label=89;break;
- case 89: 
- var $647;
- if($647){label=90;break;}else{label=91;break;}
- case 90: 
- var $649=$x;
- var $650=$prevline;
- var $651=(($650+$649)|0);
- var $652=HEAP8[($651)];
- var $653=($652&255);
- var $654=$mix;
- var $655=($654&255);
- var $656=$653^$655;
- var $657=(($656)&255);
- var $658=$x;
- var $659=$line;
- var $660=(($659+$658)|0);
- HEAP8[($660)]=$657;
- var $661=$count;
- var $662=((($661)-(1))|0);
- $count=$662;
- var $663=$x;
- var $664=((($663)+(1))|0);
- $x=$664;
- label=87;break;
- case 91: 
- label=92;break;
- case 92: 
- label=344;break;
- case 93: 
- var $668=$prevline;
- var $669=($668|0)==0;
- if($669){label=94;break;}else{label=177;break;}
- case 94: 
- label=95;break;
- case 95: 
- var $672=$count;
- var $673=$672&-8;
- var $674=($673|0)!=0;
- if($674){label=96;break;}else{var $681=0;label=97;break;}
- case 96: 
- var $676=$x;
- var $677=((($676)+(8))|0);
- var $678=$3;
- var $679=($677|0)<($678|0);
- var $681=$679;label=97;break;
- case 97: 
- var $681;
- if($681){label=98;break;}else{label=163;break;}
- case 98: 
- var $683=$mixmask;
- var $684=($683&255);
- var $685=$684<<1;
- var $686=(($685)&255);
- $mixmask=$686;
- var $687=$mixmask;
- var $688=($687&255);
- var $689=($688|0)==0;
- if($689){label=99;break;}else{label=103;break;}
- case 99: 
- var $691=$fom_mask;
- var $692=($691|0)!=0;
- if($692){label=100;break;}else{label=101;break;}
- case 100: 
- var $694=$fom_mask;
- var $701=$694;label=102;break;
- case 101: 
- var $696=$5;
- var $697=(($696+1)|0);
- $5=$697;
- var $698=HEAP8[($696)];
- var $699=($698&255);
- var $701=$699;label=102;break;
- case 102: 
- var $701;
- var $702=(($701)&255);
- $mask=$702;
- $mixmask=1;
- label=103;break;
- case 103: 
- var $704=$mask;
- var $705=($704&255);
- var $706=$mixmask;
- var $707=($706&255);
- var $708=$705&$707;
- var $709=($708|0)!=0;
- if($709){label=104;break;}else{label=105;break;}
- case 104: 
- var $711=$mix;
- var $712=$x;
- var $713=$line;
- var $714=(($713+$712)|0);
- HEAP8[($714)]=$711;
- label=106;break;
- case 105: 
- var $716=$x;
- var $717=$line;
- var $718=(($717+$716)|0);
- HEAP8[($718)]=0;
- label=106;break;
- case 106: 
- var $720=$count;
- var $721=((($720)-(1))|0);
- $count=$721;
- var $722=$x;
- var $723=((($722)+(1))|0);
- $x=$723;
- var $724=$mixmask;
- var $725=($724&255);
- var $726=$725<<1;
- var $727=(($726)&255);
- $mixmask=$727;
- var $728=$mixmask;
- var $729=($728&255);
- var $730=($729|0)==0;
- if($730){label=107;break;}else{label=111;break;}
- case 107: 
- var $732=$fom_mask;
- var $733=($732|0)!=0;
- if($733){label=108;break;}else{label=109;break;}
- case 108: 
- var $735=$fom_mask;
- var $742=$735;label=110;break;
- case 109: 
- var $737=$5;
- var $738=(($737+1)|0);
- $5=$738;
- var $739=HEAP8[($737)];
- var $740=($739&255);
- var $742=$740;label=110;break;
- case 110: 
- var $742;
- var $743=(($742)&255);
- $mask=$743;
- $mixmask=1;
- label=111;break;
- case 111: 
- var $745=$mask;
- var $746=($745&255);
- var $747=$mixmask;
- var $748=($747&255);
- var $749=$746&$748;
- var $750=($749|0)!=0;
- if($750){label=112;break;}else{label=113;break;}
- case 112: 
- var $752=$mix;
- var $753=$x;
- var $754=$line;
- var $755=(($754+$753)|0);
- HEAP8[($755)]=$752;
- label=114;break;
- case 113: 
- var $757=$x;
- var $758=$line;
- var $759=(($758+$757)|0);
- HEAP8[($759)]=0;
- label=114;break;
- case 114: 
- var $761=$count;
- var $762=((($761)-(1))|0);
- $count=$762;
- var $763=$x;
- var $764=((($763)+(1))|0);
- $x=$764;
- var $765=$mixmask;
- var $766=($765&255);
- var $767=$766<<1;
- var $768=(($767)&255);
- $mixmask=$768;
- var $769=$mixmask;
- var $770=($769&255);
- var $771=($770|0)==0;
- if($771){label=115;break;}else{label=119;break;}
- case 115: 
- var $773=$fom_mask;
- var $774=($773|0)!=0;
- if($774){label=116;break;}else{label=117;break;}
- case 116: 
- var $776=$fom_mask;
- var $783=$776;label=118;break;
- case 117: 
- var $778=$5;
- var $779=(($778+1)|0);
- $5=$779;
- var $780=HEAP8[($778)];
- var $781=($780&255);
- var $783=$781;label=118;break;
- case 118: 
- var $783;
- var $784=(($783)&255);
- $mask=$784;
- $mixmask=1;
- label=119;break;
- case 119: 
- var $786=$mask;
- var $787=($786&255);
- var $788=$mixmask;
- var $789=($788&255);
- var $790=$787&$789;
- var $791=($790|0)!=0;
- if($791){label=120;break;}else{label=121;break;}
- case 120: 
- var $793=$mix;
- var $794=$x;
- var $795=$line;
- var $796=(($795+$794)|0);
- HEAP8[($796)]=$793;
- label=122;break;
- case 121: 
- var $798=$x;
- var $799=$line;
- var $800=(($799+$798)|0);
- HEAP8[($800)]=0;
- label=122;break;
- case 122: 
- var $802=$count;
- var $803=((($802)-(1))|0);
- $count=$803;
- var $804=$x;
- var $805=((($804)+(1))|0);
- $x=$805;
- var $806=$mixmask;
- var $807=($806&255);
- var $808=$807<<1;
- var $809=(($808)&255);
- $mixmask=$809;
- var $810=$mixmask;
- var $811=($810&255);
- var $812=($811|0)==0;
- if($812){label=123;break;}else{label=127;break;}
- case 123: 
- var $814=$fom_mask;
- var $815=($814|0)!=0;
- if($815){label=124;break;}else{label=125;break;}
- case 124: 
- var $817=$fom_mask;
- var $824=$817;label=126;break;
- case 125: 
- var $819=$5;
- var $820=(($819+1)|0);
- $5=$820;
- var $821=HEAP8[($819)];
- var $822=($821&255);
- var $824=$822;label=126;break;
- case 126: 
- var $824;
- var $825=(($824)&255);
- $mask=$825;
- $mixmask=1;
- label=127;break;
- case 127: 
- var $827=$mask;
- var $828=($827&255);
- var $829=$mixmask;
- var $830=($829&255);
- var $831=$828&$830;
- var $832=($831|0)!=0;
- if($832){label=128;break;}else{label=129;break;}
- case 128: 
- var $834=$mix;
- var $835=$x;
- var $836=$line;
- var $837=(($836+$835)|0);
- HEAP8[($837)]=$834;
- label=130;break;
- case 129: 
- var $839=$x;
- var $840=$line;
- var $841=(($840+$839)|0);
- HEAP8[($841)]=0;
- label=130;break;
- case 130: 
- var $843=$count;
- var $844=((($843)-(1))|0);
- $count=$844;
- var $845=$x;
- var $846=((($845)+(1))|0);
- $x=$846;
- var $847=$mixmask;
- var $848=($847&255);
- var $849=$848<<1;
- var $850=(($849)&255);
- $mixmask=$850;
- var $851=$mixmask;
- var $852=($851&255);
- var $853=($852|0)==0;
- if($853){label=131;break;}else{label=135;break;}
- case 131: 
- var $855=$fom_mask;
- var $856=($855|0)!=0;
- if($856){label=132;break;}else{label=133;break;}
- case 132: 
- var $858=$fom_mask;
- var $865=$858;label=134;break;
- case 133: 
- var $860=$5;
- var $861=(($860+1)|0);
- $5=$861;
- var $862=HEAP8[($860)];
- var $863=($862&255);
- var $865=$863;label=134;break;
- case 134: 
- var $865;
- var $866=(($865)&255);
- $mask=$866;
- $mixmask=1;
- label=135;break;
- case 135: 
- var $868=$mask;
- var $869=($868&255);
- var $870=$mixmask;
- var $871=($870&255);
- var $872=$869&$871;
- var $873=($872|0)!=0;
- if($873){label=136;break;}else{label=137;break;}
- case 136: 
- var $875=$mix;
- var $876=$x;
- var $877=$line;
- var $878=(($877+$876)|0);
- HEAP8[($878)]=$875;
- label=138;break;
- case 137: 
- var $880=$x;
- var $881=$line;
- var $882=(($881+$880)|0);
- HEAP8[($882)]=0;
- label=138;break;
- case 138: 
- var $884=$count;
- var $885=((($884)-(1))|0);
- $count=$885;
- var $886=$x;
- var $887=((($886)+(1))|0);
- $x=$887;
- var $888=$mixmask;
- var $889=($888&255);
- var $890=$889<<1;
- var $891=(($890)&255);
- $mixmask=$891;
- var $892=$mixmask;
- var $893=($892&255);
- var $894=($893|0)==0;
- if($894){label=139;break;}else{label=143;break;}
- case 139: 
- var $896=$fom_mask;
- var $897=($896|0)!=0;
- if($897){label=140;break;}else{label=141;break;}
- case 140: 
- var $899=$fom_mask;
- var $906=$899;label=142;break;
- case 141: 
- var $901=$5;
- var $902=(($901+1)|0);
- $5=$902;
- var $903=HEAP8[($901)];
- var $904=($903&255);
- var $906=$904;label=142;break;
- case 142: 
- var $906;
- var $907=(($906)&255);
- $mask=$907;
- $mixmask=1;
- label=143;break;
- case 143: 
- var $909=$mask;
- var $910=($909&255);
- var $911=$mixmask;
- var $912=($911&255);
- var $913=$910&$912;
- var $914=($913|0)!=0;
- if($914){label=144;break;}else{label=145;break;}
- case 144: 
- var $916=$mix;
- var $917=$x;
- var $918=$line;
- var $919=(($918+$917)|0);
- HEAP8[($919)]=$916;
- label=146;break;
- case 145: 
- var $921=$x;
- var $922=$line;
- var $923=(($922+$921)|0);
- HEAP8[($923)]=0;
- label=146;break;
- case 146: 
- var $925=$count;
- var $926=((($925)-(1))|0);
- $count=$926;
- var $927=$x;
- var $928=((($927)+(1))|0);
- $x=$928;
- var $929=$mixmask;
- var $930=($929&255);
- var $931=$930<<1;
- var $932=(($931)&255);
- $mixmask=$932;
- var $933=$mixmask;
- var $934=($933&255);
- var $935=($934|0)==0;
- if($935){label=147;break;}else{label=151;break;}
- case 147: 
- var $937=$fom_mask;
- var $938=($937|0)!=0;
- if($938){label=148;break;}else{label=149;break;}
- case 148: 
- var $940=$fom_mask;
- var $947=$940;label=150;break;
- case 149: 
- var $942=$5;
- var $943=(($942+1)|0);
- $5=$943;
- var $944=HEAP8[($942)];
- var $945=($944&255);
- var $947=$945;label=150;break;
- case 150: 
- var $947;
- var $948=(($947)&255);
- $mask=$948;
- $mixmask=1;
- label=151;break;
- case 151: 
- var $950=$mask;
- var $951=($950&255);
- var $952=$mixmask;
- var $953=($952&255);
- var $954=$951&$953;
- var $955=($954|0)!=0;
- if($955){label=152;break;}else{label=153;break;}
- case 152: 
- var $957=$mix;
- var $958=$x;
- var $959=$line;
- var $960=(($959+$958)|0);
- HEAP8[($960)]=$957;
- label=154;break;
- case 153: 
- var $962=$x;
- var $963=$line;
- var $964=(($963+$962)|0);
- HEAP8[($964)]=0;
- label=154;break;
- case 154: 
- var $966=$count;
- var $967=((($966)-(1))|0);
- $count=$967;
- var $968=$x;
- var $969=((($968)+(1))|0);
- $x=$969;
- var $970=$mixmask;
- var $971=($970&255);
- var $972=$971<<1;
- var $973=(($972)&255);
- $mixmask=$973;
- var $974=$mixmask;
- var $975=($974&255);
- var $976=($975|0)==0;
- if($976){label=155;break;}else{label=159;break;}
- case 155: 
- var $978=$fom_mask;
- var $979=($978|0)!=0;
- if($979){label=156;break;}else{label=157;break;}
- case 156: 
- var $981=$fom_mask;
- var $988=$981;label=158;break;
- case 157: 
- var $983=$5;
- var $984=(($983+1)|0);
- $5=$984;
- var $985=HEAP8[($983)];
- var $986=($985&255);
- var $988=$986;label=158;break;
- case 158: 
- var $988;
- var $989=(($988)&255);
- $mask=$989;
- $mixmask=1;
- label=159;break;
- case 159: 
- var $991=$mask;
- var $992=($991&255);
- var $993=$mixmask;
- var $994=($993&255);
- var $995=$992&$994;
- var $996=($995|0)!=0;
- if($996){label=160;break;}else{label=161;break;}
- case 160: 
- var $998=$mix;
- var $999=$x;
- var $1000=$line;
- var $1001=(($1000+$999)|0);
- HEAP8[($1001)]=$998;
- label=162;break;
- case 161: 
- var $1003=$x;
- var $1004=$line;
- var $1005=(($1004+$1003)|0);
- HEAP8[($1005)]=0;
- label=162;break;
- case 162: 
- var $1007=$count;
- var $1008=((($1007)-(1))|0);
- $count=$1008;
- var $1009=$x;
- var $1010=((($1009)+(1))|0);
- $x=$1010;
- label=95;break;
- case 163: 
- label=164;break;
- case 164: 
- var $1013=$count;
- var $1014=($1013|0)>0;
- if($1014){label=165;break;}else{var $1020=0;label=166;break;}
- case 165: 
- var $1016=$x;
- var $1017=$3;
- var $1018=($1016|0)<($1017|0);
- var $1020=$1018;label=166;break;
- case 166: 
- var $1020;
- if($1020){label=167;break;}else{label=176;break;}
- case 167: 
- var $1022=$mixmask;
- var $1023=($1022&255);
- var $1024=$1023<<1;
- var $1025=(($1024)&255);
- $mixmask=$1025;
- var $1026=$mixmask;
- var $1027=($1026&255);
- var $1028=($1027|0)==0;
- if($1028){label=168;break;}else{label=172;break;}
- case 168: 
- var $1030=$fom_mask;
- var $1031=($1030|0)!=0;
- if($1031){label=169;break;}else{label=170;break;}
- case 169: 
- var $1033=$fom_mask;
- var $1040=$1033;label=171;break;
- case 170: 
- var $1035=$5;
- var $1036=(($1035+1)|0);
- $5=$1036;
- var $1037=HEAP8[($1035)];
- var $1038=($1037&255);
- var $1040=$1038;label=171;break;
- case 171: 
- var $1040;
- var $1041=(($1040)&255);
- $mask=$1041;
- $mixmask=1;
- label=172;break;
- case 172: 
- var $1043=$mask;
- var $1044=($1043&255);
- var $1045=$mixmask;
- var $1046=($1045&255);
- var $1047=$1044&$1046;
- var $1048=($1047|0)!=0;
- if($1048){label=173;break;}else{label=174;break;}
- case 173: 
- var $1050=$mix;
- var $1051=$x;
- var $1052=$line;
- var $1053=(($1052+$1051)|0);
- HEAP8[($1053)]=$1050;
- label=175;break;
- case 174: 
- var $1055=$x;
- var $1056=$line;
- var $1057=(($1056+$1055)|0);
- HEAP8[($1057)]=0;
- label=175;break;
- case 175: 
- var $1059=$count;
- var $1060=((($1059)-(1))|0);
- $count=$1060;
- var $1061=$x;
- var $1062=((($1061)+(1))|0);
- $x=$1062;
- label=164;break;
- case 176: 
- label=260;break;
- case 177: 
- label=178;break;
- case 178: 
- var $1066=$count;
- var $1067=$1066&-8;
- var $1068=($1067|0)!=0;
- if($1068){label=179;break;}else{var $1075=0;label=180;break;}
- case 179: 
- var $1070=$x;
- var $1071=((($1070)+(8))|0);
- var $1072=$3;
- var $1073=($1071|0)<($1072|0);
- var $1075=$1073;label=180;break;
- case 180: 
- var $1075;
- if($1075){label=181;break;}else{label=246;break;}
- case 181: 
- var $1077=$mixmask;
- var $1078=($1077&255);
- var $1079=$1078<<1;
- var $1080=(($1079)&255);
- $mixmask=$1080;
- var $1081=$mixmask;
- var $1082=($1081&255);
- var $1083=($1082|0)==0;
- if($1083){label=182;break;}else{label=186;break;}
- case 182: 
- var $1085=$fom_mask;
- var $1086=($1085|0)!=0;
- if($1086){label=183;break;}else{label=184;break;}
- case 183: 
- var $1088=$fom_mask;
- var $1095=$1088;label=185;break;
- case 184: 
- var $1090=$5;
- var $1091=(($1090+1)|0);
- $5=$1091;
- var $1092=HEAP8[($1090)];
- var $1093=($1092&255);
- var $1095=$1093;label=185;break;
- case 185: 
- var $1095;
- var $1096=(($1095)&255);
- $mask=$1096;
- $mixmask=1;
- label=186;break;
- case 186: 
- var $1098=$mask;
- var $1099=($1098&255);
- var $1100=$mixmask;
- var $1101=($1100&255);
- var $1102=$1099&$1101;
- var $1103=($1102|0)!=0;
- if($1103){label=187;break;}else{label=188;break;}
- case 187: 
- var $1105=$x;
- var $1106=$prevline;
- var $1107=(($1106+$1105)|0);
- var $1108=HEAP8[($1107)];
- var $1109=($1108&255);
- var $1110=$mix;
- var $1111=($1110&255);
- var $1112=$1109^$1111;
- var $1113=(($1112)&255);
- var $1114=$x;
- var $1115=$line;
- var $1116=(($1115+$1114)|0);
- HEAP8[($1116)]=$1113;
- label=189;break;
- case 188: 
- var $1118=$x;
- var $1119=$prevline;
- var $1120=(($1119+$1118)|0);
- var $1121=HEAP8[($1120)];
- var $1122=$x;
- var $1123=$line;
- var $1124=(($1123+$1122)|0);
- HEAP8[($1124)]=$1121;
- label=189;break;
- case 189: 
- var $1126=$count;
- var $1127=((($1126)-(1))|0);
- $count=$1127;
- var $1128=$x;
- var $1129=((($1128)+(1))|0);
- $x=$1129;
- var $1130=$mixmask;
- var $1131=($1130&255);
- var $1132=$1131<<1;
- var $1133=(($1132)&255);
- $mixmask=$1133;
- var $1134=$mixmask;
- var $1135=($1134&255);
- var $1136=($1135|0)==0;
- if($1136){label=190;break;}else{label=194;break;}
- case 190: 
- var $1138=$fom_mask;
- var $1139=($1138|0)!=0;
- if($1139){label=191;break;}else{label=192;break;}
- case 191: 
- var $1141=$fom_mask;
- var $1148=$1141;label=193;break;
- case 192: 
- var $1143=$5;
- var $1144=(($1143+1)|0);
- $5=$1144;
- var $1145=HEAP8[($1143)];
- var $1146=($1145&255);
- var $1148=$1146;label=193;break;
- case 193: 
- var $1148;
- var $1149=(($1148)&255);
- $mask=$1149;
- $mixmask=1;
- label=194;break;
- case 194: 
- var $1151=$mask;
- var $1152=($1151&255);
- var $1153=$mixmask;
- var $1154=($1153&255);
- var $1155=$1152&$1154;
- var $1156=($1155|0)!=0;
- if($1156){label=195;break;}else{label=196;break;}
- case 195: 
- var $1158=$x;
- var $1159=$prevline;
- var $1160=(($1159+$1158)|0);
- var $1161=HEAP8[($1160)];
- var $1162=($1161&255);
- var $1163=$mix;
- var $1164=($1163&255);
- var $1165=$1162^$1164;
- var $1166=(($1165)&255);
- var $1167=$x;
- var $1168=$line;
- var $1169=(($1168+$1167)|0);
- HEAP8[($1169)]=$1166;
- label=197;break;
- case 196: 
- var $1171=$x;
- var $1172=$prevline;
- var $1173=(($1172+$1171)|0);
- var $1174=HEAP8[($1173)];
- var $1175=$x;
- var $1176=$line;
- var $1177=(($1176+$1175)|0);
- HEAP8[($1177)]=$1174;
- label=197;break;
- case 197: 
- var $1179=$count;
- var $1180=((($1179)-(1))|0);
- $count=$1180;
- var $1181=$x;
- var $1182=((($1181)+(1))|0);
- $x=$1182;
- var $1183=$mixmask;
- var $1184=($1183&255);
- var $1185=$1184<<1;
- var $1186=(($1185)&255);
- $mixmask=$1186;
- var $1187=$mixmask;
- var $1188=($1187&255);
- var $1189=($1188|0)==0;
- if($1189){label=198;break;}else{label=202;break;}
- case 198: 
- var $1191=$fom_mask;
- var $1192=($1191|0)!=0;
- if($1192){label=199;break;}else{label=200;break;}
- case 199: 
- var $1194=$fom_mask;
- var $1201=$1194;label=201;break;
- case 200: 
- var $1196=$5;
- var $1197=(($1196+1)|0);
- $5=$1197;
- var $1198=HEAP8[($1196)];
- var $1199=($1198&255);
- var $1201=$1199;label=201;break;
- case 201: 
- var $1201;
- var $1202=(($1201)&255);
- $mask=$1202;
- $mixmask=1;
- label=202;break;
- case 202: 
- var $1204=$mask;
- var $1205=($1204&255);
- var $1206=$mixmask;
- var $1207=($1206&255);
- var $1208=$1205&$1207;
- var $1209=($1208|0)!=0;
- if($1209){label=203;break;}else{label=204;break;}
- case 203: 
- var $1211=$x;
- var $1212=$prevline;
- var $1213=(($1212+$1211)|0);
- var $1214=HEAP8[($1213)];
- var $1215=($1214&255);
- var $1216=$mix;
- var $1217=($1216&255);
- var $1218=$1215^$1217;
- var $1219=(($1218)&255);
- var $1220=$x;
- var $1221=$line;
- var $1222=(($1221+$1220)|0);
- HEAP8[($1222)]=$1219;
- label=205;break;
- case 204: 
- var $1224=$x;
- var $1225=$prevline;
- var $1226=(($1225+$1224)|0);
- var $1227=HEAP8[($1226)];
- var $1228=$x;
- var $1229=$line;
- var $1230=(($1229+$1228)|0);
- HEAP8[($1230)]=$1227;
- label=205;break;
- case 205: 
- var $1232=$count;
- var $1233=((($1232)-(1))|0);
- $count=$1233;
- var $1234=$x;
- var $1235=((($1234)+(1))|0);
- $x=$1235;
- var $1236=$mixmask;
- var $1237=($1236&255);
- var $1238=$1237<<1;
- var $1239=(($1238)&255);
- $mixmask=$1239;
- var $1240=$mixmask;
- var $1241=($1240&255);
- var $1242=($1241|0)==0;
- if($1242){label=206;break;}else{label=210;break;}
- case 206: 
- var $1244=$fom_mask;
- var $1245=($1244|0)!=0;
- if($1245){label=207;break;}else{label=208;break;}
- case 207: 
- var $1247=$fom_mask;
- var $1254=$1247;label=209;break;
- case 208: 
- var $1249=$5;
- var $1250=(($1249+1)|0);
- $5=$1250;
- var $1251=HEAP8[($1249)];
- var $1252=($1251&255);
- var $1254=$1252;label=209;break;
- case 209: 
- var $1254;
- var $1255=(($1254)&255);
- $mask=$1255;
- $mixmask=1;
- label=210;break;
- case 210: 
- var $1257=$mask;
- var $1258=($1257&255);
- var $1259=$mixmask;
- var $1260=($1259&255);
- var $1261=$1258&$1260;
- var $1262=($1261|0)!=0;
- if($1262){label=211;break;}else{label=212;break;}
- case 211: 
- var $1264=$x;
- var $1265=$prevline;
- var $1266=(($1265+$1264)|0);
- var $1267=HEAP8[($1266)];
- var $1268=($1267&255);
- var $1269=$mix;
- var $1270=($1269&255);
- var $1271=$1268^$1270;
- var $1272=(($1271)&255);
- var $1273=$x;
- var $1274=$line;
- var $1275=(($1274+$1273)|0);
- HEAP8[($1275)]=$1272;
- label=213;break;
- case 212: 
- var $1277=$x;
- var $1278=$prevline;
- var $1279=(($1278+$1277)|0);
- var $1280=HEAP8[($1279)];
- var $1281=$x;
- var $1282=$line;
- var $1283=(($1282+$1281)|0);
- HEAP8[($1283)]=$1280;
- label=213;break;
- case 213: 
- var $1285=$count;
- var $1286=((($1285)-(1))|0);
- $count=$1286;
- var $1287=$x;
- var $1288=((($1287)+(1))|0);
- $x=$1288;
- var $1289=$mixmask;
- var $1290=($1289&255);
- var $1291=$1290<<1;
- var $1292=(($1291)&255);
- $mixmask=$1292;
- var $1293=$mixmask;
- var $1294=($1293&255);
- var $1295=($1294|0)==0;
- if($1295){label=214;break;}else{label=218;break;}
- case 214: 
- var $1297=$fom_mask;
- var $1298=($1297|0)!=0;
- if($1298){label=215;break;}else{label=216;break;}
- case 215: 
- var $1300=$fom_mask;
- var $1307=$1300;label=217;break;
- case 216: 
- var $1302=$5;
- var $1303=(($1302+1)|0);
- $5=$1303;
- var $1304=HEAP8[($1302)];
- var $1305=($1304&255);
- var $1307=$1305;label=217;break;
- case 217: 
- var $1307;
- var $1308=(($1307)&255);
- $mask=$1308;
- $mixmask=1;
- label=218;break;
- case 218: 
- var $1310=$mask;
- var $1311=($1310&255);
- var $1312=$mixmask;
- var $1313=($1312&255);
- var $1314=$1311&$1313;
- var $1315=($1314|0)!=0;
- if($1315){label=219;break;}else{label=220;break;}
- case 219: 
- var $1317=$x;
- var $1318=$prevline;
- var $1319=(($1318+$1317)|0);
- var $1320=HEAP8[($1319)];
- var $1321=($1320&255);
- var $1322=$mix;
- var $1323=($1322&255);
- var $1324=$1321^$1323;
- var $1325=(($1324)&255);
- var $1326=$x;
- var $1327=$line;
- var $1328=(($1327+$1326)|0);
- HEAP8[($1328)]=$1325;
- label=221;break;
- case 220: 
- var $1330=$x;
- var $1331=$prevline;
- var $1332=(($1331+$1330)|0);
- var $1333=HEAP8[($1332)];
- var $1334=$x;
- var $1335=$line;
- var $1336=(($1335+$1334)|0);
- HEAP8[($1336)]=$1333;
- label=221;break;
- case 221: 
- var $1338=$count;
- var $1339=((($1338)-(1))|0);
- $count=$1339;
- var $1340=$x;
- var $1341=((($1340)+(1))|0);
- $x=$1341;
- var $1342=$mixmask;
- var $1343=($1342&255);
- var $1344=$1343<<1;
- var $1345=(($1344)&255);
- $mixmask=$1345;
- var $1346=$mixmask;
- var $1347=($1346&255);
- var $1348=($1347|0)==0;
- if($1348){label=222;break;}else{label=226;break;}
- case 222: 
- var $1350=$fom_mask;
- var $1351=($1350|0)!=0;
- if($1351){label=223;break;}else{label=224;break;}
- case 223: 
- var $1353=$fom_mask;
- var $1360=$1353;label=225;break;
- case 224: 
- var $1355=$5;
- var $1356=(($1355+1)|0);
- $5=$1356;
- var $1357=HEAP8[($1355)];
- var $1358=($1357&255);
- var $1360=$1358;label=225;break;
- case 225: 
- var $1360;
- var $1361=(($1360)&255);
- $mask=$1361;
- $mixmask=1;
- label=226;break;
- case 226: 
- var $1363=$mask;
- var $1364=($1363&255);
- var $1365=$mixmask;
- var $1366=($1365&255);
- var $1367=$1364&$1366;
- var $1368=($1367|0)!=0;
- if($1368){label=227;break;}else{label=228;break;}
- case 227: 
- var $1370=$x;
- var $1371=$prevline;
- var $1372=(($1371+$1370)|0);
- var $1373=HEAP8[($1372)];
- var $1374=($1373&255);
- var $1375=$mix;
- var $1376=($1375&255);
- var $1377=$1374^$1376;
- var $1378=(($1377)&255);
- var $1379=$x;
- var $1380=$line;
- var $1381=(($1380+$1379)|0);
- HEAP8[($1381)]=$1378;
- label=229;break;
- case 228: 
- var $1383=$x;
- var $1384=$prevline;
- var $1385=(($1384+$1383)|0);
- var $1386=HEAP8[($1385)];
- var $1387=$x;
- var $1388=$line;
- var $1389=(($1388+$1387)|0);
- HEAP8[($1389)]=$1386;
- label=229;break;
- case 229: 
- var $1391=$count;
- var $1392=((($1391)-(1))|0);
- $count=$1392;
- var $1393=$x;
- var $1394=((($1393)+(1))|0);
- $x=$1394;
- var $1395=$mixmask;
- var $1396=($1395&255);
- var $1397=$1396<<1;
- var $1398=(($1397)&255);
- $mixmask=$1398;
- var $1399=$mixmask;
- var $1400=($1399&255);
- var $1401=($1400|0)==0;
- if($1401){label=230;break;}else{label=234;break;}
- case 230: 
- var $1403=$fom_mask;
- var $1404=($1403|0)!=0;
- if($1404){label=231;break;}else{label=232;break;}
- case 231: 
- var $1406=$fom_mask;
- var $1413=$1406;label=233;break;
- case 232: 
- var $1408=$5;
- var $1409=(($1408+1)|0);
- $5=$1409;
- var $1410=HEAP8[($1408)];
- var $1411=($1410&255);
- var $1413=$1411;label=233;break;
- case 233: 
- var $1413;
- var $1414=(($1413)&255);
- $mask=$1414;
- $mixmask=1;
- label=234;break;
- case 234: 
- var $1416=$mask;
- var $1417=($1416&255);
- var $1418=$mixmask;
- var $1419=($1418&255);
- var $1420=$1417&$1419;
- var $1421=($1420|0)!=0;
- if($1421){label=235;break;}else{label=236;break;}
- case 235: 
- var $1423=$x;
- var $1424=$prevline;
- var $1425=(($1424+$1423)|0);
- var $1426=HEAP8[($1425)];
- var $1427=($1426&255);
- var $1428=$mix;
- var $1429=($1428&255);
- var $1430=$1427^$1429;
- var $1431=(($1430)&255);
- var $1432=$x;
- var $1433=$line;
- var $1434=(($1433+$1432)|0);
- HEAP8[($1434)]=$1431;
- label=237;break;
- case 236: 
- var $1436=$x;
- var $1437=$prevline;
- var $1438=(($1437+$1436)|0);
- var $1439=HEAP8[($1438)];
- var $1440=$x;
- var $1441=$line;
- var $1442=(($1441+$1440)|0);
- HEAP8[($1442)]=$1439;
- label=237;break;
- case 237: 
- var $1444=$count;
- var $1445=((($1444)-(1))|0);
- $count=$1445;
- var $1446=$x;
- var $1447=((($1446)+(1))|0);
- $x=$1447;
- var $1448=$mixmask;
- var $1449=($1448&255);
- var $1450=$1449<<1;
- var $1451=(($1450)&255);
- $mixmask=$1451;
- var $1452=$mixmask;
- var $1453=($1452&255);
- var $1454=($1453|0)==0;
- if($1454){label=238;break;}else{label=242;break;}
- case 238: 
- var $1456=$fom_mask;
- var $1457=($1456|0)!=0;
- if($1457){label=239;break;}else{label=240;break;}
- case 239: 
- var $1459=$fom_mask;
- var $1466=$1459;label=241;break;
- case 240: 
- var $1461=$5;
- var $1462=(($1461+1)|0);
- $5=$1462;
- var $1463=HEAP8[($1461)];
- var $1464=($1463&255);
- var $1466=$1464;label=241;break;
- case 241: 
- var $1466;
- var $1467=(($1466)&255);
- $mask=$1467;
- $mixmask=1;
- label=242;break;
- case 242: 
- var $1469=$mask;
- var $1470=($1469&255);
- var $1471=$mixmask;
- var $1472=($1471&255);
- var $1473=$1470&$1472;
- var $1474=($1473|0)!=0;
- if($1474){label=243;break;}else{label=244;break;}
- case 243: 
- var $1476=$x;
- var $1477=$prevline;
- var $1478=(($1477+$1476)|0);
- var $1479=HEAP8[($1478)];
- var $1480=($1479&255);
- var $1481=$mix;
- var $1482=($1481&255);
- var $1483=$1480^$1482;
- var $1484=(($1483)&255);
- var $1485=$x;
- var $1486=$line;
- var $1487=(($1486+$1485)|0);
- HEAP8[($1487)]=$1484;
- label=245;break;
- case 244: 
- var $1489=$x;
- var $1490=$prevline;
- var $1491=(($1490+$1489)|0);
- var $1492=HEAP8[($1491)];
- var $1493=$x;
- var $1494=$line;
- var $1495=(($1494+$1493)|0);
- HEAP8[($1495)]=$1492;
- label=245;break;
- case 245: 
- var $1497=$count;
- var $1498=((($1497)-(1))|0);
- $count=$1498;
- var $1499=$x;
- var $1500=((($1499)+(1))|0);
- $x=$1500;
- label=178;break;
- case 246: 
- label=247;break;
- case 247: 
- var $1503=$count;
- var $1504=($1503|0)>0;
- if($1504){label=248;break;}else{var $1510=0;label=249;break;}
- case 248: 
- var $1506=$x;
- var $1507=$3;
- var $1508=($1506|0)<($1507|0);
- var $1510=$1508;label=249;break;
- case 249: 
- var $1510;
- if($1510){label=250;break;}else{label=259;break;}
- case 250: 
- var $1512=$mixmask;
- var $1513=($1512&255);
- var $1514=$1513<<1;
- var $1515=(($1514)&255);
- $mixmask=$1515;
- var $1516=$mixmask;
- var $1517=($1516&255);
- var $1518=($1517|0)==0;
- if($1518){label=251;break;}else{label=255;break;}
- case 251: 
- var $1520=$fom_mask;
- var $1521=($1520|0)!=0;
- if($1521){label=252;break;}else{label=253;break;}
- case 252: 
- var $1523=$fom_mask;
- var $1530=$1523;label=254;break;
- case 253: 
- var $1525=$5;
- var $1526=(($1525+1)|0);
- $5=$1526;
- var $1527=HEAP8[($1525)];
- var $1528=($1527&255);
- var $1530=$1528;label=254;break;
- case 254: 
- var $1530;
- var $1531=(($1530)&255);
- $mask=$1531;
- $mixmask=1;
- label=255;break;
- case 255: 
- var $1533=$mask;
- var $1534=($1533&255);
- var $1535=$mixmask;
- var $1536=($1535&255);
- var $1537=$1534&$1536;
- var $1538=($1537|0)!=0;
- if($1538){label=256;break;}else{label=257;break;}
- case 256: 
- var $1540=$x;
- var $1541=$prevline;
- var $1542=(($1541+$1540)|0);
- var $1543=HEAP8[($1542)];
- var $1544=($1543&255);
- var $1545=$mix;
- var $1546=($1545&255);
- var $1547=$1544^$1546;
- var $1548=(($1547)&255);
- var $1549=$x;
- var $1550=$line;
- var $1551=(($1550+$1549)|0);
- HEAP8[($1551)]=$1548;
- label=258;break;
- case 257: 
- var $1553=$x;
- var $1554=$prevline;
- var $1555=(($1554+$1553)|0);
- var $1556=HEAP8[($1555)];
- var $1557=$x;
- var $1558=$line;
- var $1559=(($1558+$1557)|0);
- HEAP8[($1559)]=$1556;
- label=258;break;
- case 258: 
- var $1561=$count;
- var $1562=((($1561)-(1))|0);
- $count=$1562;
- var $1563=$x;
- var $1564=((($1563)+(1))|0);
- $x=$1564;
- label=247;break;
- case 259: 
- label=260;break;
- case 260: 
- label=344;break;
- case 261: 
- label=262;break;
- case 262: 
- var $1569=$count;
- var $1570=$1569&-8;
- var $1571=($1570|0)!=0;
- if($1571){label=263;break;}else{var $1578=0;label=264;break;}
- case 263: 
- var $1573=$x;
- var $1574=((($1573)+(8))|0);
- var $1575=$3;
- var $1576=($1574|0)<($1575|0);
- var $1578=$1576;label=264;break;
- case 264: 
- var $1578;
- if($1578){label=265;break;}else{label=266;break;}
- case 265: 
- var $1580=$colour2;
- var $1581=$x;
- var $1582=$line;
- var $1583=(($1582+$1581)|0);
- HEAP8[($1583)]=$1580;
- var $1584=$count;
- var $1585=((($1584)-(1))|0);
- $count=$1585;
- var $1586=$x;
- var $1587=((($1586)+(1))|0);
- $x=$1587;
- var $1588=$colour2;
- var $1589=$x;
- var $1590=$line;
- var $1591=(($1590+$1589)|0);
- HEAP8[($1591)]=$1588;
- var $1592=$count;
- var $1593=((($1592)-(1))|0);
- $count=$1593;
- var $1594=$x;
- var $1595=((($1594)+(1))|0);
- $x=$1595;
- var $1596=$colour2;
- var $1597=$x;
- var $1598=$line;
- var $1599=(($1598+$1597)|0);
- HEAP8[($1599)]=$1596;
- var $1600=$count;
- var $1601=((($1600)-(1))|0);
- $count=$1601;
- var $1602=$x;
- var $1603=((($1602)+(1))|0);
- $x=$1603;
- var $1604=$colour2;
- var $1605=$x;
- var $1606=$line;
- var $1607=(($1606+$1605)|0);
- HEAP8[($1607)]=$1604;
- var $1608=$count;
- var $1609=((($1608)-(1))|0);
- $count=$1609;
- var $1610=$x;
- var $1611=((($1610)+(1))|0);
- $x=$1611;
- var $1612=$colour2;
- var $1613=$x;
- var $1614=$line;
- var $1615=(($1614+$1613)|0);
- HEAP8[($1615)]=$1612;
- var $1616=$count;
- var $1617=((($1616)-(1))|0);
- $count=$1617;
- var $1618=$x;
- var $1619=((($1618)+(1))|0);
- $x=$1619;
- var $1620=$colour2;
- var $1621=$x;
- var $1622=$line;
- var $1623=(($1622+$1621)|0);
- HEAP8[($1623)]=$1620;
- var $1624=$count;
- var $1625=((($1624)-(1))|0);
- $count=$1625;
- var $1626=$x;
- var $1627=((($1626)+(1))|0);
- $x=$1627;
- var $1628=$colour2;
- var $1629=$x;
- var $1630=$line;
- var $1631=(($1630+$1629)|0);
- HEAP8[($1631)]=$1628;
- var $1632=$count;
- var $1633=((($1632)-(1))|0);
- $count=$1633;
- var $1634=$x;
- var $1635=((($1634)+(1))|0);
- $x=$1635;
- var $1636=$colour2;
- var $1637=$x;
- var $1638=$line;
- var $1639=(($1638+$1637)|0);
- HEAP8[($1639)]=$1636;
- var $1640=$count;
- var $1641=((($1640)-(1))|0);
- $count=$1641;
- var $1642=$x;
- var $1643=((($1642)+(1))|0);
- $x=$1643;
- label=262;break;
- case 266: 
- label=267;break;
- case 267: 
- var $1646=$count;
- var $1647=($1646|0)>0;
- if($1647){label=268;break;}else{var $1653=0;label=269;break;}
- case 268: 
- var $1649=$x;
- var $1650=$3;
- var $1651=($1649|0)<($1650|0);
- var $1653=$1651;label=269;break;
- case 269: 
- var $1653;
- if($1653){label=270;break;}else{label=271;break;}
- case 270: 
- var $1655=$colour2;
- var $1656=$x;
- var $1657=$line;
- var $1658=(($1657+$1656)|0);
- HEAP8[($1658)]=$1655;
- var $1659=$count;
- var $1660=((($1659)-(1))|0);
- $count=$1660;
- var $1661=$x;
- var $1662=((($1661)+(1))|0);
- $x=$1662;
- label=267;break;
- case 271: 
- label=344;break;
- case 272: 
- label=273;break;
- case 273: 
- var $1666=$count;
- var $1667=$1666&-8;
- var $1668=($1667|0)!=0;
- if($1668){label=274;break;}else{var $1675=0;label=275;break;}
- case 274: 
- var $1670=$x;
- var $1671=((($1670)+(8))|0);
- var $1672=$3;
- var $1673=($1671|0)<($1672|0);
- var $1675=$1673;label=275;break;
- case 275: 
- var $1675;
- if($1675){label=276;break;}else{label=277;break;}
- case 276: 
- var $1677=$5;
- var $1678=(($1677+1)|0);
- $5=$1678;
- var $1679=HEAP8[($1677)];
- var $1680=$x;
- var $1681=$line;
- var $1682=(($1681+$1680)|0);
- HEAP8[($1682)]=$1679;
- var $1683=$count;
- var $1684=((($1683)-(1))|0);
- $count=$1684;
- var $1685=$x;
- var $1686=((($1685)+(1))|0);
- $x=$1686;
- var $1687=$5;
- var $1688=(($1687+1)|0);
- $5=$1688;
- var $1689=HEAP8[($1687)];
- var $1690=$x;
- var $1691=$line;
- var $1692=(($1691+$1690)|0);
- HEAP8[($1692)]=$1689;
- var $1693=$count;
- var $1694=((($1693)-(1))|0);
- $count=$1694;
- var $1695=$x;
- var $1696=((($1695)+(1))|0);
- $x=$1696;
- var $1697=$5;
- var $1698=(($1697+1)|0);
- $5=$1698;
- var $1699=HEAP8[($1697)];
- var $1700=$x;
- var $1701=$line;
- var $1702=(($1701+$1700)|0);
- HEAP8[($1702)]=$1699;
- var $1703=$count;
- var $1704=((($1703)-(1))|0);
- $count=$1704;
- var $1705=$x;
- var $1706=((($1705)+(1))|0);
- $x=$1706;
- var $1707=$5;
- var $1708=(($1707+1)|0);
- $5=$1708;
- var $1709=HEAP8[($1707)];
- var $1710=$x;
- var $1711=$line;
- var $1712=(($1711+$1710)|0);
- HEAP8[($1712)]=$1709;
- var $1713=$count;
- var $1714=((($1713)-(1))|0);
- $count=$1714;
- var $1715=$x;
- var $1716=((($1715)+(1))|0);
- $x=$1716;
- var $1717=$5;
- var $1718=(($1717+1)|0);
- $5=$1718;
- var $1719=HEAP8[($1717)];
- var $1720=$x;
- var $1721=$line;
- var $1722=(($1721+$1720)|0);
- HEAP8[($1722)]=$1719;
- var $1723=$count;
- var $1724=((($1723)-(1))|0);
- $count=$1724;
- var $1725=$x;
- var $1726=((($1725)+(1))|0);
- $x=$1726;
- var $1727=$5;
- var $1728=(($1727+1)|0);
- $5=$1728;
- var $1729=HEAP8[($1727)];
- var $1730=$x;
- var $1731=$line;
- var $1732=(($1731+$1730)|0);
- HEAP8[($1732)]=$1729;
- var $1733=$count;
- var $1734=((($1733)-(1))|0);
- $count=$1734;
- var $1735=$x;
- var $1736=((($1735)+(1))|0);
- $x=$1736;
- var $1737=$5;
- var $1738=(($1737+1)|0);
- $5=$1738;
- var $1739=HEAP8[($1737)];
- var $1740=$x;
- var $1741=$line;
- var $1742=(($1741+$1740)|0);
- HEAP8[($1742)]=$1739;
- var $1743=$count;
- var $1744=((($1743)-(1))|0);
- $count=$1744;
- var $1745=$x;
- var $1746=((($1745)+(1))|0);
- $x=$1746;
- var $1747=$5;
- var $1748=(($1747+1)|0);
- $5=$1748;
- var $1749=HEAP8[($1747)];
- var $1750=$x;
- var $1751=$line;
- var $1752=(($1751+$1750)|0);
- HEAP8[($1752)]=$1749;
- var $1753=$count;
- var $1754=((($1753)-(1))|0);
- $count=$1754;
- var $1755=$x;
- var $1756=((($1755)+(1))|0);
- $x=$1756;
- label=273;break;
- case 277: 
- label=278;break;
- case 278: 
- var $1759=$count;
- var $1760=($1759|0)>0;
- if($1760){label=279;break;}else{var $1766=0;label=280;break;}
- case 279: 
- var $1762=$x;
- var $1763=$3;
- var $1764=($1762|0)<($1763|0);
- var $1766=$1764;label=280;break;
- case 280: 
- var $1766;
- if($1766){label=281;break;}else{label=282;break;}
- case 281: 
- var $1768=$5;
- var $1769=(($1768+1)|0);
- $5=$1769;
- var $1770=HEAP8[($1768)];
- var $1771=$x;
- var $1772=$line;
- var $1773=(($1772+$1771)|0);
- HEAP8[($1773)]=$1770;
- var $1774=$count;
- var $1775=((($1774)-(1))|0);
- $count=$1775;
- var $1776=$x;
- var $1777=((($1776)+(1))|0);
- $x=$1777;
- label=278;break;
- case 282: 
- label=344;break;
- case 283: 
- label=284;break;
- case 284: 
- var $1781=$count;
- var $1782=$1781&-8;
- var $1783=($1782|0)!=0;
- if($1783){label=285;break;}else{var $1790=0;label=286;break;}
- case 285: 
- var $1785=$x;
- var $1786=((($1785)+(8))|0);
- var $1787=$3;
- var $1788=($1786|0)<($1787|0);
- var $1790=$1788;label=286;break;
- case 286: 
- var $1790;
- if($1790){label=287;break;}else{label=312;break;}
- case 287: 
- var $1792=$bicolour;
- var $1793=($1792|0)!=0;
- if($1793){label=288;break;}else{label=289;break;}
- case 288: 
- var $1795=$colour2;
- var $1796=$x;
- var $1797=$line;
- var $1798=(($1797+$1796)|0);
- HEAP8[($1798)]=$1795;
- $bicolour=0;
- label=290;break;
- case 289: 
- var $1800=$colour1;
- var $1801=$x;
- var $1802=$line;
- var $1803=(($1802+$1801)|0);
- HEAP8[($1803)]=$1800;
- $bicolour=1;
- var $1804=$count;
- var $1805=((($1804)+(1))|0);
- $count=$1805;
- label=290;break;
- case 290: 
- var $1807=$count;
- var $1808=((($1807)-(1))|0);
- $count=$1808;
- var $1809=$x;
- var $1810=((($1809)+(1))|0);
- $x=$1810;
- var $1811=$bicolour;
- var $1812=($1811|0)!=0;
- if($1812){label=291;break;}else{label=292;break;}
- case 291: 
- var $1814=$colour2;
- var $1815=$x;
- var $1816=$line;
- var $1817=(($1816+$1815)|0);
- HEAP8[($1817)]=$1814;
- $bicolour=0;
- label=293;break;
- case 292: 
- var $1819=$colour1;
- var $1820=$x;
- var $1821=$line;
- var $1822=(($1821+$1820)|0);
- HEAP8[($1822)]=$1819;
- $bicolour=1;
- var $1823=$count;
- var $1824=((($1823)+(1))|0);
- $count=$1824;
- label=293;break;
- case 293: 
- var $1826=$count;
- var $1827=((($1826)-(1))|0);
- $count=$1827;
- var $1828=$x;
- var $1829=((($1828)+(1))|0);
- $x=$1829;
- var $1830=$bicolour;
- var $1831=($1830|0)!=0;
- if($1831){label=294;break;}else{label=295;break;}
- case 294: 
- var $1833=$colour2;
- var $1834=$x;
- var $1835=$line;
- var $1836=(($1835+$1834)|0);
- HEAP8[($1836)]=$1833;
- $bicolour=0;
- label=296;break;
- case 295: 
- var $1838=$colour1;
- var $1839=$x;
- var $1840=$line;
- var $1841=(($1840+$1839)|0);
- HEAP8[($1841)]=$1838;
- $bicolour=1;
- var $1842=$count;
- var $1843=((($1842)+(1))|0);
- $count=$1843;
- label=296;break;
- case 296: 
- var $1845=$count;
- var $1846=((($1845)-(1))|0);
- $count=$1846;
- var $1847=$x;
- var $1848=((($1847)+(1))|0);
- $x=$1848;
- var $1849=$bicolour;
- var $1850=($1849|0)!=0;
- if($1850){label=297;break;}else{label=298;break;}
- case 297: 
- var $1852=$colour2;
- var $1853=$x;
- var $1854=$line;
- var $1855=(($1854+$1853)|0);
- HEAP8[($1855)]=$1852;
- $bicolour=0;
- label=299;break;
- case 298: 
- var $1857=$colour1;
- var $1858=$x;
- var $1859=$line;
- var $1860=(($1859+$1858)|0);
- HEAP8[($1860)]=$1857;
- $bicolour=1;
- var $1861=$count;
- var $1862=((($1861)+(1))|0);
- $count=$1862;
- label=299;break;
- case 299: 
- var $1864=$count;
- var $1865=((($1864)-(1))|0);
- $count=$1865;
- var $1866=$x;
- var $1867=((($1866)+(1))|0);
- $x=$1867;
- var $1868=$bicolour;
- var $1869=($1868|0)!=0;
- if($1869){label=300;break;}else{label=301;break;}
- case 300: 
- var $1871=$colour2;
- var $1872=$x;
- var $1873=$line;
- var $1874=(($1873+$1872)|0);
- HEAP8[($1874)]=$1871;
- $bicolour=0;
- label=302;break;
- case 301: 
- var $1876=$colour1;
- var $1877=$x;
- var $1878=$line;
- var $1879=(($1878+$1877)|0);
- HEAP8[($1879)]=$1876;
- $bicolour=1;
- var $1880=$count;
- var $1881=((($1880)+(1))|0);
- $count=$1881;
- label=302;break;
- case 302: 
- var $1883=$count;
- var $1884=((($1883)-(1))|0);
- $count=$1884;
- var $1885=$x;
- var $1886=((($1885)+(1))|0);
- $x=$1886;
- var $1887=$bicolour;
- var $1888=($1887|0)!=0;
- if($1888){label=303;break;}else{label=304;break;}
- case 303: 
- var $1890=$colour2;
- var $1891=$x;
- var $1892=$line;
- var $1893=(($1892+$1891)|0);
- HEAP8[($1893)]=$1890;
- $bicolour=0;
- label=305;break;
- case 304: 
- var $1895=$colour1;
- var $1896=$x;
- var $1897=$line;
- var $1898=(($1897+$1896)|0);
- HEAP8[($1898)]=$1895;
- $bicolour=1;
- var $1899=$count;
- var $1900=((($1899)+(1))|0);
- $count=$1900;
- label=305;break;
- case 305: 
- var $1902=$count;
- var $1903=((($1902)-(1))|0);
- $count=$1903;
- var $1904=$x;
- var $1905=((($1904)+(1))|0);
- $x=$1905;
- var $1906=$bicolour;
- var $1907=($1906|0)!=0;
- if($1907){label=306;break;}else{label=307;break;}
- case 306: 
- var $1909=$colour2;
- var $1910=$x;
- var $1911=$line;
- var $1912=(($1911+$1910)|0);
- HEAP8[($1912)]=$1909;
- $bicolour=0;
- label=308;break;
- case 307: 
- var $1914=$colour1;
- var $1915=$x;
- var $1916=$line;
- var $1917=(($1916+$1915)|0);
- HEAP8[($1917)]=$1914;
- $bicolour=1;
- var $1918=$count;
- var $1919=((($1918)+(1))|0);
- $count=$1919;
- label=308;break;
- case 308: 
- var $1921=$count;
- var $1922=((($1921)-(1))|0);
- $count=$1922;
- var $1923=$x;
- var $1924=((($1923)+(1))|0);
- $x=$1924;
- var $1925=$bicolour;
- var $1926=($1925|0)!=0;
- if($1926){label=309;break;}else{label=310;break;}
- case 309: 
- var $1928=$colour2;
- var $1929=$x;
- var $1930=$line;
- var $1931=(($1930+$1929)|0);
- HEAP8[($1931)]=$1928;
- $bicolour=0;
- label=311;break;
- case 310: 
- var $1933=$colour1;
- var $1934=$x;
- var $1935=$line;
- var $1936=(($1935+$1934)|0);
- HEAP8[($1936)]=$1933;
- $bicolour=1;
- var $1937=$count;
- var $1938=((($1937)+(1))|0);
- $count=$1938;
- label=311;break;
- case 311: 
- var $1940=$count;
- var $1941=((($1940)-(1))|0);
- $count=$1941;
- var $1942=$x;
- var $1943=((($1942)+(1))|0);
- $x=$1943;
- label=284;break;
- case 312: 
- label=313;break;
- case 313: 
- var $1946=$count;
- var $1947=($1946|0)>0;
- if($1947){label=314;break;}else{var $1953=0;label=315;break;}
- case 314: 
- var $1949=$x;
- var $1950=$3;
- var $1951=($1949|0)<($1950|0);
- var $1953=$1951;label=315;break;
- case 315: 
- var $1953;
- if($1953){label=316;break;}else{label=320;break;}
- case 316: 
- var $1955=$bicolour;
- var $1956=($1955|0)!=0;
- if($1956){label=317;break;}else{label=318;break;}
- case 317: 
- var $1958=$colour2;
- var $1959=$x;
- var $1960=$line;
- var $1961=(($1960+$1959)|0);
- HEAP8[($1961)]=$1958;
- $bicolour=0;
- label=319;break;
- case 318: 
- var $1963=$colour1;
- var $1964=$x;
- var $1965=$line;
- var $1966=(($1965+$1964)|0);
- HEAP8[($1966)]=$1963;
- $bicolour=1;
- var $1967=$count;
- var $1968=((($1967)+(1))|0);
- $count=$1968;
- label=319;break;
- case 319: 
- var $1970=$count;
- var $1971=((($1970)-(1))|0);
- $count=$1971;
- var $1972=$x;
- var $1973=((($1972)+(1))|0);
- $x=$1973;
- label=313;break;
- case 320: 
- label=344;break;
- case 321: 
- label=322;break;
- case 322: 
- var $1977=$count;
- var $1978=$1977&-8;
- var $1979=($1978|0)!=0;
- if($1979){label=323;break;}else{var $1986=0;label=324;break;}
- case 323: 
- var $1981=$x;
- var $1982=((($1981)+(8))|0);
- var $1983=$3;
- var $1984=($1982|0)<($1983|0);
- var $1986=$1984;label=324;break;
- case 324: 
- var $1986;
- if($1986){label=325;break;}else{label=326;break;}
- case 325: 
- var $1988=$x;
- var $1989=$line;
- var $1990=(($1989+$1988)|0);
- HEAP8[($1990)]=-1;
- var $1991=$count;
- var $1992=((($1991)-(1))|0);
- $count=$1992;
- var $1993=$x;
- var $1994=((($1993)+(1))|0);
- $x=$1994;
- var $1995=$x;
- var $1996=$line;
- var $1997=(($1996+$1995)|0);
- HEAP8[($1997)]=-1;
- var $1998=$count;
- var $1999=((($1998)-(1))|0);
- $count=$1999;
- var $2000=$x;
- var $2001=((($2000)+(1))|0);
- $x=$2001;
- var $2002=$x;
- var $2003=$line;
- var $2004=(($2003+$2002)|0);
- HEAP8[($2004)]=-1;
- var $2005=$count;
- var $2006=((($2005)-(1))|0);
- $count=$2006;
- var $2007=$x;
- var $2008=((($2007)+(1))|0);
- $x=$2008;
- var $2009=$x;
- var $2010=$line;
- var $2011=(($2010+$2009)|0);
- HEAP8[($2011)]=-1;
- var $2012=$count;
- var $2013=((($2012)-(1))|0);
- $count=$2013;
- var $2014=$x;
- var $2015=((($2014)+(1))|0);
- $x=$2015;
- var $2016=$x;
- var $2017=$line;
- var $2018=(($2017+$2016)|0);
- HEAP8[($2018)]=-1;
- var $2019=$count;
- var $2020=((($2019)-(1))|0);
- $count=$2020;
- var $2021=$x;
- var $2022=((($2021)+(1))|0);
- $x=$2022;
- var $2023=$x;
- var $2024=$line;
- var $2025=(($2024+$2023)|0);
- HEAP8[($2025)]=-1;
- var $2026=$count;
- var $2027=((($2026)-(1))|0);
- $count=$2027;
- var $2028=$x;
- var $2029=((($2028)+(1))|0);
- $x=$2029;
- var $2030=$x;
- var $2031=$line;
- var $2032=(($2031+$2030)|0);
- HEAP8[($2032)]=-1;
- var $2033=$count;
- var $2034=((($2033)-(1))|0);
- $count=$2034;
- var $2035=$x;
- var $2036=((($2035)+(1))|0);
- $x=$2036;
- var $2037=$x;
- var $2038=$line;
- var $2039=(($2038+$2037)|0);
- HEAP8[($2039)]=-1;
- var $2040=$count;
- var $2041=((($2040)-(1))|0);
- $count=$2041;
- var $2042=$x;
- var $2043=((($2042)+(1))|0);
- $x=$2043;
- label=322;break;
- case 326: 
- label=327;break;
- case 327: 
- var $2046=$count;
- var $2047=($2046|0)>0;
- if($2047){label=328;break;}else{var $2053=0;label=329;break;}
- case 328: 
- var $2049=$x;
- var $2050=$3;
- var $2051=($2049|0)<($2050|0);
- var $2053=$2051;label=329;break;
- case 329: 
- var $2053;
- if($2053){label=330;break;}else{label=331;break;}
- case 330: 
- var $2055=$x;
- var $2056=$line;
- var $2057=(($2056+$2055)|0);
- HEAP8[($2057)]=-1;
- var $2058=$count;
- var $2059=((($2058)-(1))|0);
- $count=$2059;
- var $2060=$x;
- var $2061=((($2060)+(1))|0);
- $x=$2061;
- label=327;break;
- case 331: 
- label=344;break;
- case 332: 
- label=333;break;
- case 333: 
- var $2065=$count;
- var $2066=$2065&-8;
- var $2067=($2066|0)!=0;
- if($2067){label=334;break;}else{var $2074=0;label=335;break;}
- case 334: 
- var $2069=$x;
- var $2070=((($2069)+(8))|0);
- var $2071=$3;
- var $2072=($2070|0)<($2071|0);
- var $2074=$2072;label=335;break;
- case 335: 
- var $2074;
- if($2074){label=336;break;}else{label=337;break;}
- case 336: 
- var $2076=$x;
- var $2077=$line;
- var $2078=(($2077+$2076)|0);
- HEAP8[($2078)]=0;
- var $2079=$count;
- var $2080=((($2079)-(1))|0);
- $count=$2080;
- var $2081=$x;
- var $2082=((($2081)+(1))|0);
- $x=$2082;
- var $2083=$x;
- var $2084=$line;
- var $2085=(($2084+$2083)|0);
- HEAP8[($2085)]=0;
- var $2086=$count;
- var $2087=((($2086)-(1))|0);
- $count=$2087;
- var $2088=$x;
- var $2089=((($2088)+(1))|0);
- $x=$2089;
- var $2090=$x;
- var $2091=$line;
- var $2092=(($2091+$2090)|0);
- HEAP8[($2092)]=0;
- var $2093=$count;
- var $2094=((($2093)-(1))|0);
- $count=$2094;
- var $2095=$x;
- var $2096=((($2095)+(1))|0);
- $x=$2096;
- var $2097=$x;
- var $2098=$line;
- var $2099=(($2098+$2097)|0);
- HEAP8[($2099)]=0;
- var $2100=$count;
- var $2101=((($2100)-(1))|0);
- $count=$2101;
- var $2102=$x;
- var $2103=((($2102)+(1))|0);
- $x=$2103;
- var $2104=$x;
- var $2105=$line;
- var $2106=(($2105+$2104)|0);
- HEAP8[($2106)]=0;
- var $2107=$count;
- var $2108=((($2107)-(1))|0);
- $count=$2108;
- var $2109=$x;
- var $2110=((($2109)+(1))|0);
- $x=$2110;
- var $2111=$x;
- var $2112=$line;
- var $2113=(($2112+$2111)|0);
- HEAP8[($2113)]=0;
- var $2114=$count;
- var $2115=((($2114)-(1))|0);
- $count=$2115;
- var $2116=$x;
- var $2117=((($2116)+(1))|0);
- $x=$2117;
- var $2118=$x;
- var $2119=$line;
- var $2120=(($2119+$2118)|0);
- HEAP8[($2120)]=0;
- var $2121=$count;
- var $2122=((($2121)-(1))|0);
- $count=$2122;
- var $2123=$x;
- var $2124=((($2123)+(1))|0);
- $x=$2124;
- var $2125=$x;
- var $2126=$line;
- var $2127=(($2126+$2125)|0);
- HEAP8[($2127)]=0;
- var $2128=$count;
- var $2129=((($2128)-(1))|0);
- $count=$2129;
- var $2130=$x;
- var $2131=((($2130)+(1))|0);
- $x=$2131;
- label=333;break;
- case 337: 
- label=338;break;
- case 338: 
- var $2134=$count;
- var $2135=($2134|0)>0;
- if($2135){label=339;break;}else{var $2141=0;label=340;break;}
- case 339: 
- var $2137=$x;
- var $2138=$3;
- var $2139=($2137|0)<($2138|0);
- var $2141=$2139;label=340;break;
- case 340: 
- var $2141;
- if($2141){label=341;break;}else{label=342;break;}
- case 341: 
- var $2143=$x;
- var $2144=$line;
- var $2145=(($2144+$2143)|0);
- HEAP8[($2145)]=0;
- var $2146=$count;
- var $2147=((($2146)-(1))|0);
- $count=$2147;
- var $2148=$x;
- var $2149=((($2148)+(1))|0);
- $x=$2149;
- label=338;break;
- case 342: 
- label=344;break;
- case 343: 
- $1=0;
- label=347;break;
- case 344: 
- label=34;break;
- case 345: 
+ var $81=$i;
+ var $82=((($81)+(1))|0);
+ $i=$82;
  label=2;break;
- case 346: 
- $1=1;
- label=347;break;
- case 347: 
- var $2156=$1;
- STACKTOP=sp;return $2156;
+ case 5: 
+ var $84=$temp;
+ _free($84);
+ var $85=$rv;
+ STACKTOP=sp;return $85;
   default: assert(0, "bad label: " + label);
  }
 
 }
-
+Module["_bitmap_decompress_15"] = _bitmap_decompress_15;
 
 function _bitmap_decompress2($output,$width,$height,$input,$size){
  var label=0;
@@ -10879,6 +7808,235 @@ function _bitmap_decompress2($output,$width,$height,$input,$size){
 
 }
 
+
+function _bitmap_decompress_16($output,$width,$height,$input,$size){
+ var label=0;
+ var sp=STACKTOP; (assert((STACKTOP|0) < (STACK_MAX|0))|0);
+ label = 1; 
+ while(1)switch(label){
+ case 1: 
+ var $1;
+ var $2;
+ var $3;
+ var $4;
+ var $5;
+ var $temp;
+ var $rv;
+ var $i;
+ var $a;
+ var $r;
+ var $g;
+ var $b;
+ $1=$output;
+ $2=$width;
+ $3=$height;
+ $4=$input;
+ $5=$size;
+ var $6=$2;
+ var $7=$3;
+ var $8=(Math_imul($6,$7)|0);
+ var $9=($8<<1);
+ var $10=_malloc($9);
+ $temp=$10;
+ var $11=$temp;
+ var $12=$2;
+ var $13=$3;
+ var $14=$4;
+ var $15=$5;
+ var $16=_bitmap_decompress2($11,$12,$13,$14,$15);
+ $rv=$16;
+ $i=0;
+ label=2;break;
+ case 2: 
+ var $18=$i;
+ var $19=$2;
+ var $20=$3;
+ var $21=(Math_imul($19,$20)|0);
+ var $22=($18|0)<($21|0);
+ if($22){label=3;break;}else{label=5;break;}
+ case 3: 
+ var $24=$i;
+ var $25=$temp;
+ var $26=$25;
+ var $27=(($26+($24<<1))|0);
+ var $28=HEAP16[(($27)>>1)];
+ $a=$28;
+ var $29=$a;
+ var $30=($29&65535);
+ var $31=$30&63488;
+ var $32=$31>>11;
+ var $33=(($32)&255);
+ $r=$33;
+ var $34=$a;
+ var $35=($34&65535);
+ var $36=$35&2016;
+ var $37=$36>>5;
+ var $38=(($37)&255);
+ $g=$38;
+ var $39=$a;
+ var $40=($39&65535);
+ var $41=$40&31;
+ var $42=(($41)&255);
+ $b=$42;
+ var $43=$r;
+ var $44=($43&255);
+ var $45=((($44)*(255))&-1);
+ var $46=(((($45|0))/(31))&-1);
+ var $47=(($46)&255);
+ $r=$47;
+ var $48=$g;
+ var $49=($48&255);
+ var $50=((($49)*(255))&-1);
+ var $51=(((($50|0))/(63))&-1);
+ var $52=(($51)&255);
+ $g=$52;
+ var $53=$b;
+ var $54=($53&255);
+ var $55=((($54)*(255))&-1);
+ var $56=(((($55|0))/(31))&-1);
+ var $57=(($56)&255);
+ $b=$57;
+ var $58=$r;
+ var $59=$i;
+ var $60=($59<<2);
+ var $61=$1;
+ var $62=(($61+$60)|0);
+ HEAP8[($62)]=$58;
+ var $63=$g;
+ var $64=$i;
+ var $65=($64<<2);
+ var $66=((($65)+(1))|0);
+ var $67=$1;
+ var $68=(($67+$66)|0);
+ HEAP8[($68)]=$63;
+ var $69=$b;
+ var $70=$i;
+ var $71=($70<<2);
+ var $72=((($71)+(2))|0);
+ var $73=$1;
+ var $74=(($73+$72)|0);
+ HEAP8[($74)]=$69;
+ var $75=$i;
+ var $76=($75<<2);
+ var $77=((($76)+(3))|0);
+ var $78=$1;
+ var $79=(($78+$77)|0);
+ HEAP8[($79)]=-1;
+ label=4;break;
+ case 4: 
+ var $81=$i;
+ var $82=((($81)+(1))|0);
+ $i=$82;
+ label=2;break;
+ case 5: 
+ var $84=$temp;
+ _free($84);
+ var $85=$rv;
+ STACKTOP=sp;return $85;
+  default: assert(0, "bad label: " + label);
+ }
+
+}
+Module["_bitmap_decompress_16"] = _bitmap_decompress_16;
+
+function _bitmap_decompress_24($output,$width,$height,$input,$size){
+ var label=0;
+ var sp=STACKTOP; (assert((STACKTOP|0) < (STACK_MAX|0))|0);
+ label = 1; 
+ while(1)switch(label){
+ case 1: 
+ var $1;
+ var $2;
+ var $3;
+ var $4;
+ var $5;
+ var $temp;
+ var $rv;
+ var $i;
+ $1=$output;
+ $2=$width;
+ $3=$height;
+ $4=$input;
+ $5=$size;
+ var $6=$2;
+ var $7=$3;
+ var $8=(Math_imul($6,$7)|0);
+ var $9=((($8)*(3))&-1);
+ var $10=_malloc($9);
+ $temp=$10;
+ var $11=$temp;
+ var $12=$2;
+ var $13=$3;
+ var $14=$4;
+ var $15=$5;
+ var $16=_bitmap_decompress3($11,$12,$13,$14,$15);
+ $rv=$16;
+ $i=0;
+ label=2;break;
+ case 2: 
+ var $18=$i;
+ var $19=$2;
+ var $20=$3;
+ var $21=(Math_imul($19,$20)|0);
+ var $22=($18|0)<($21|0);
+ if($22){label=3;break;}else{label=5;break;}
+ case 3: 
+ var $24=$i;
+ var $25=((($24)*(3))&-1);
+ var $26=$temp;
+ var $27=(($26+$25)|0);
+ var $28=HEAP8[($27)];
+ var $29=$i;
+ var $30=($29<<2);
+ var $31=$1;
+ var $32=(($31+$30)|0);
+ HEAP8[($32)]=$28;
+ var $33=$i;
+ var $34=((($33)*(3))&-1);
+ var $35=((($34)+(1))|0);
+ var $36=$temp;
+ var $37=(($36+$35)|0);
+ var $38=HEAP8[($37)];
+ var $39=$i;
+ var $40=($39<<2);
+ var $41=((($40)+(1))|0);
+ var $42=$1;
+ var $43=(($42+$41)|0);
+ HEAP8[($43)]=$38;
+ var $44=$i;
+ var $45=((($44)*(3))&-1);
+ var $46=((($45)+(2))|0);
+ var $47=$temp;
+ var $48=(($47+$46)|0);
+ var $49=HEAP8[($48)];
+ var $50=$i;
+ var $51=($50<<2);
+ var $52=((($51)+(2))|0);
+ var $53=$1;
+ var $54=(($53+$52)|0);
+ HEAP8[($54)]=$49;
+ var $55=$i;
+ var $56=($55<<2);
+ var $57=((($56)+(3))|0);
+ var $58=$1;
+ var $59=(($58+$57)|0);
+ HEAP8[($59)]=-1;
+ label=4;break;
+ case 4: 
+ var $61=$i;
+ var $62=((($61)+(1))|0);
+ $i=$62;
+ label=2;break;
+ case 5: 
+ var $64=$temp;
+ _free($64);
+ var $65=$rv;
+ STACKTOP=sp;return $65;
+  default: assert(0, "bad label: " + label);
+ }
+
+}
+Module["_bitmap_decompress_24"] = _bitmap_decompress_24;
 
 function _bitmap_decompress3($output,$width,$height,$input,$size){
  var label=0;
@@ -16649,6 +13807,30 @@ function _bitmap_decompress3($output,$width,$height,$input,$size){
 
 }
 
+
+function _bitmap_decompress_32($output,$width,$height,$input,$size){
+ var label=0;
+ var sp=STACKTOP; (assert((STACKTOP|0) < (STACK_MAX|0))|0);
+
+ var $1;
+ var $2;
+ var $3;
+ var $4;
+ var $5;
+ $1=$output;
+ $2=$width;
+ $3=$height;
+ $4=$input;
+ $5=$size;
+ var $6=$1;
+ var $7=$2;
+ var $8=$3;
+ var $9=$4;
+ var $10=$5;
+ var $11=_bitmap_decompress4($6,$7,$8,$9,$10);
+ STACKTOP=sp;return $11;
+}
+Module["_bitmap_decompress_32"] = _bitmap_decompress_32;
 
 function _bitmap_decompress4($output,$width,$height,$input,$size){
  var label=0;
