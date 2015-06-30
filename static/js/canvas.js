@@ -45,8 +45,6 @@
 				throw 'invalid bitmap data format';
 			}
 			
-			console.log('bpp ' + bitmap.bitsPerPixel);
-			
 			var input = new Uint8Array(bitmap.data);
 			var inputPtr = Module._malloc(input.length);
 			var inputHeap = new Uint8Array(Module.HEAPU8.buffer, inputPtr, input.length);
