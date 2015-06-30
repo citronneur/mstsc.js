@@ -26,6 +26,27 @@
 	
 	Canvas.prototype = {
 		update : function(bitmap) {
+			
+			var fName = null;
+			switch (bitmap.bitsPerPixel) {
+			case 15:
+				fName = 'bitmap_decompress_15';
+				break;
+			case 16:
+				fName = 'bitmap_decompress_16';
+				break;
+			case 24:
+				fName = 'bitmap_decompress_24';
+				break;
+			case 32:
+				fName = 'bitmap_decompress_32';
+				break;
+			default:
+				throw 'invalid bitmap data format';
+			}
+			
+			console.log('bpp ' + bitmap.bitsPerPixel);
+			
 			var input = new Uint8Array(bitmap.data);
 			var inputPtr = Module._malloc(input.length);
 			var inputHeap = new Uint8Array(Module.HEAPU8.buffer, inputPtr, input.length);
@@ -36,12 +57,12 @@
 
 			var outputHeap = new Uint8Array(Module.HEAPU8.buffer, outputPtr, ouputSize);
 
-
-			var res = Module.ccall('bitmap_decompress',
+			var res = Module.ccall(fName,
 				'number',
 				['number', 'number', 'number', 'number', 'number', 'number'],
-				[outputHeap.byteOffset, bitmap.width, bitmap.height, inputHeap.byteOffset, input.length, 2]
+				[outputHeap.byteOffset, bitmap.width, bitmap.height, inputHeap.byteOffset, input.length]
 			);
+			
 			var output = new Uint8ClampedArray(outputHeap.buffer, outputHeap.byteOffset, ouputSize);
 			var imageData = this.ctx.createImageData(bitmap.width, bitmap.height);
 			imageData.data.set(output);

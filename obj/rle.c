@@ -890,49 +890,72 @@ bitmap_decompress4(uint8 * output, int width, int height, uint8 * input, int siz
 	return size == total_pro;
 }
 
-/* main decompress function */
 int
-bitmap_decompress(uint8 * output, int width, int height, uint8* input, int size, int Bpp)
-{
-	RD_BOOL rv = False;
-	
-	uint8 * temp = (uint8*)malloc(width * height * Bpp);
+bitmap_decompress_15(uint8 * output, int width, int height, uint8* input, int size) {
+	uint8 * temp = (uint8*)malloc(width * height * 2);
+	RD_BOOL rv = bitmap_decompress2(temp, width, height, input, size);
 
-	switch (Bpp)
-	{
-		case 1:
-			rv = bitmap_decompress1(temp, width, height, input, size);
-			break;
-		case 2:
-			rv = bitmap_decompress2(temp, width, height, input, size);
-			for(int i = 0; i < width * height; i++) {
-				uint16 a = ((uint16*)temp)[i];
-				uint8 r = (a & 0xf800) >> 11;
-				uint8 g = (a & 0x07e0) >> 5;
-				uint8 b = (a & 0x001f);
-				r = r * 255 / 31;
-				g = g * 255 / 63;
-				b = b * 255 / 31;
-				output[i * 4] = r;
-				output[i * 4 + 1] = g;
-				output[i * 4 + 2] = b;
-				output[i * 4 + 3] = 0xff;
-			}
-			break;
-		case 3:
-			rv = bitmap_decompress3(temp, width, height, input, size);
-			break;
-		case 4:
-			rv = bitmap_decompress4(temp, width, height, input, size);
-			break;
-		default:
-			unimpl("Bpp %d\n", Bpp);
-			break;
+	// convert to rgba
+	for(int i = 0; i < width * height; i++) {
+		uint16 a = ((uint16*)temp)[i];
+		uint8 r = (a & 0x7c00) >> 10;
+		uint8 g = (a & 0x03e0) >> 5;
+		uint8 b = (a & 0x001f);
+		r = r * 255 / 31;
+		g = g * 255 / 31;
+		b = b * 255 / 31;
+		output[i * 4] = r;
+		output[i * 4 + 1] = g;
+		output[i * 4 + 2] = b;
+		output[i * 4 + 3] = 0xff;
 	}
 
 	free(temp);
 	return rv;
 }
 
+int
+bitmap_decompress_16(uint8 * output, int width, int height, uint8* input, int size) {
+	uint8 * temp = (uint8*)malloc(width * height * 2);
+	RD_BOOL rv = bitmap_decompress2(temp, width, height, input, size);
 
+	// convert to rgba
+	for(int i = 0; i < width * height; i++) {
+		uint16 a = ((uint16*)temp)[i];
+		uint8 r = (a & 0xf800) >> 11;
+		uint8 g = (a & 0x07e0) >> 5;
+		uint8 b = (a & 0x001f);
+		r = r * 255 / 31;
+		g = g * 255 / 63;
+		b = b * 255 / 31;
+		output[i * 4] = r;
+		output[i * 4 + 1] = g;
+		output[i * 4 + 2] = b;
+		output[i * 4 + 3] = 0xff;
+	}
 
+	free(temp);
+	return rv;
+}
+
+int
+bitmap_decompress_24(uint8 * output, int width, int height, uint8* input, int size) {
+	uint8 * temp = (uint8*)malloc(width * height * 3);
+	RD_BOOL rv = bitmap_decompress3(temp, width, height, input, size);
+
+	// convert to rgba
+	for(int i = 0; i < width * height; i++) {
+		output[i * 4] = temp[i * 3];
+		output[i * 4 + 1] = temp[i * 3 + 1];
+		output[i * 4 + 2] = temp[i * 3 + 2];
+		output[i * 4 + 3] = 0xff;
+	}
+	free(temp);
+
+	return rv;
+}
+
+int
+bitmap_decompress_32(uint8 * output, int width, int height, uint8* input, int size) {
+	return bitmap_decompress4(output, width, height, input, size);
+}

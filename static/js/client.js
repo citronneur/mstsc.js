@@ -232,16 +232,17 @@
 	}
 	
 	Client.prototype = {
-		connect : function (ip, domain, username, password, errCallback) {
+		connect : function (ip, domain, username, password, next) {
 			var self = this;
 			this.socket = io('http://localhost:3000').on('connect', function() {
 				console.log('[mstsc.js] connected');
 			}).on('bitmap', function(bitmap) {
 				self.render.update(bitmap);
 			}).on('close', function() {
+				next(null);
 				console.log('[mstsc.js] close');
 			}).on('error', function (err) {
-				errCallback(err);
+				next(err);
 				console.log('[mstsc.js] error : ' + err.code + '(' + err.message + ')');
 			});
 			this.socket.emit('infos', {ip : ip, port : 3389, screen : { width : this.canvas.width, height : this.canvas.height }, domain : domain, username : username, password : password});
