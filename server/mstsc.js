@@ -3,7 +3,7 @@
  *
  * This file is part of mstsc.js.
  *
- * node-rdp is free software: you can redistribute it and/or modify
+ * mstsc.js is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -25,7 +25,7 @@ var rdp = require('rdp');
  */
 function createServer() {
 	var app = express();
-	app.use(express.static(__dirname + '/../static'))
+	app.use(express.static(__dirname + '/../client'))
 	app.get('/', function(req, res) {
 		res.redirect('/html/index.html');
 	});
