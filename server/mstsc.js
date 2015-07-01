@@ -16,22 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-var express = require('express');
-var http = require('http');
+
 var rdp = require('rdp');
 
 /**
  * Create proxy between rdp layer and socket io
  */
-function createServer() {
-	var app = express();
-	app.use(express.static(__dirname + '/../client'))
-	app.get('/', function(req, res) {
-		res.redirect('/html/index.html');
-	});
-	var server = http.createServer(app);
-	var io = require('socket.io')(server);
-	
+module.exports = function (app) {
+	var io = require('socket.io')(app);
 	var self = this;
 	io.on('connection', function(socket) {
 	
@@ -41,20 +33,30 @@ function createServer() {
 			};
 			
 			self.rdp = rdp.createClient({ 
+				
 				domain : infos.domain, 
 				userName : infos.username,
 				password : infos.password,
 				enablePerf : true,
 				autoLogin : true,
 				screen : infos.screen
+				
 			}).on('connect', function () {
+				
 				io.emit('connect');
+				
 			}).on('bitmap', function(bitmap) {
+				
 				io.emit('bitmap', bitmap);
+				
 			}).on('close', function() {
+				
 				io.emit('close');
+				
 			}).on('error', function(err) {
+				
 				io.emit('error', err);
+				
 			}).connect(infos.ip, infos.port);
 			
 		}).on('mouse', function (x, y, button, isPressed) {
@@ -82,13 +84,4 @@ function createServer() {
 			self.rdp.close();
 		});
 	});
-	
-	return server;
 }
-
-/**
- * Module exports
- */
-module.exports = {
-	createServer : createServer
-};

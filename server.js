@@ -17,4 +17,14 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require('./server/mstsc').createServer().listen(process.env.PORT || 9250);
+var express = require('express');
+var http = require('http');
+
+var app = express();
+app.use(express.static(__dirname + '/client'))
+app.get('/', function(req, res) {
+	res.sendFile(__dirname + '/client/html/index.html');
+});
+var server = http.createServer(app).listen(process.env.PORT || 9250);
+
+require('./server/mstsc')(server);

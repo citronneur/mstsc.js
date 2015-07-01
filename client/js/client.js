@@ -195,7 +195,7 @@
 	Client.prototype = {
 		connect : function (ip, domain, username, password, next) {
 			var self = this;
-			this.socket = io('http://localhost:9250').on('connect', function() {
+			this.socket = io(window.location.protocol + "//" + window.location.host, { "resource": "apps/mstsc.js/socket.io" }).on('connect', function() {
 				console.log('[mstsc.js] connected');
 				// bind mouse move event
 				self.canvas.addEventListener('mousemove', function (e) {
