@@ -33,16 +33,16 @@
 	var keyMap = {
 	 	"" : 0x0000,
 	 	"Escape" : 0x0001,
-	 	"Digit0" : 0x0002,
-	 	"Digit1" : 0x0003,
-	 	"Digit2" : 0x0004,
-	 	"Digit3" : 0x0005,
-	 	"Digit4" : 0x0006,
-		"Digit5" : 0x0007,
-	 	"Digit6" : 0x0008,
-	 	"Digit7" : 0x0009,
-	 	"Digit8" : 0x000A,
-	 	"Digit9" : 0x000B,
+	 	"Digit1" : 0x0002,
+	 	"Digit2" : 0x0003,
+	 	"Digit3" : 0x0004,
+	 	"Digit4" : 0x0005,
+	 	"Digit5" : 0x0006,
+		"Digit6" : 0x0007,
+	 	"Digit7" : 0x0008,
+	 	"Digit8" : 0x0009,
+	 	"Digit9" : 0x000A,
+	 	"Digit0" : 0x000B,
 	 	"Minus" : 0x000C,
 	 	"Equal" : 0x000D,
  	 	"Backspace" : 0x000E,
@@ -189,64 +189,65 @@
 		
 		var self = this;
 		
-		// bind mouse move event
-		this.canvas.addEventListener('mousemove', function (e) {
-			if (!self.socket) {
-				return;
-			}
-			var offset = Mstsc.getOffset(self.canvas);
-			self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, 0, false);
-		});
 		
-		this.canvas.addEventListener('mousedown', function (e) {
-			if (!self.socket) {
-				return;
-			}
-			var offset = Mstsc.getOffset(self.canvas);
-			self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), true);
-			e.preventDefault();
-		});
-		
-		this.canvas.addEventListener('mouseup', function (e) {
-			if (!self.socket) {
-				return;
-			}
-			var offset = Mstsc.getOffset(self.canvas);
-			self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), false);
-			e.preventDefault();
-		});
-		
-		window.addEventListener('keydown', function (e) {
-			if (!self.socket) {
-				return;
-			}
-			if (e.code) {
-				self.socket.emit('scancode', keyMap[e.code], true);
-			}
-			else {
-				self.socket.emit('unicode', e.keyCode, true);
-			}
-			
-		});
-		
-		window.addEventListener('keyup', function (e) {
-			if (!self.socket) {
-				return;
-			}
-			if (e.code) {
-				self.socket.emit('scancode', keyMap[e.code], false);
-			}
-			else {
-				self.socket.emit('unicode', e.keyCode, false);
-			}
-		});
 	}
 	
 	Client.prototype = {
 		connect : function (ip, domain, username, password, next) {
 			var self = this;
-			this.socket = io('http://localhost:3000').on('connect', function() {
+			this.socket = io('http://localhost:9250').on('connect', function() {
 				console.log('[mstsc.js] connected');
+				// bind mouse move event
+				self.canvas.addEventListener('mousemove', function (e) {
+					if (!self.socket) {
+						return;
+					}
+					var offset = Mstsc.getOffset(self.canvas);
+					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, 0, false);
+				});
+				
+				self.canvas.addEventListener('mousedown', function (e) {
+					if (!self.socket) {
+						return;
+					}
+					var offset = Mstsc.getOffset(self.canvas);
+					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), true);
+					e.preventDefault();
+				});
+				
+				self.canvas.addEventListener('mouseup', function (e) {
+					if (!self.socket) {
+						return;
+					}
+					var offset = Mstsc.getOffset(self.canvas);
+					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), false);
+					e.preventDefault();
+				});
+				
+				window.addEventListener('keydown', function (e) {
+					if (!self.socket) {
+						return;
+					}
+					if (e.code) {
+						self.socket.emit('scancode', keyMap[e.code], true);
+					}
+					else {
+						self.socket.emit('unicode', e.keyCode, true);
+					}
+					
+				});
+				
+				window.addEventListener('keyup', function (e) {
+					if (!self.socket) {
+						return;
+					}
+					if (e.code) {
+						self.socket.emit('scancode', keyMap[e.code], false);
+					}
+					else {
+						self.socket.emit('unicode', e.keyCode, false);
+					}
+				});
 			}).on('bitmap', function(bitmap) {
 				self.render.update(bitmap);
 			}).on('close', function() {
