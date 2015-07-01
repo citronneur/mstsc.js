@@ -22,8 +22,8 @@ var rdp = require('rdp');
 /**
  * Create proxy between rdp layer and socket io
  */
-module.exports = function (app) {
-	var io = require('socket.io')(app);
+module.exports = function (server) {
+	var io = require('socket.io')(server);
 	var self = this;
 	io.on('connection', function(socket) {
 	
