@@ -20,7 +20,9 @@
 		"express": "4.x.x",
 		"socket.io": "1.3.x"
 	},
-
+	"scripts": {
+		"start": "node server.js"
+	},
 	"cozy-permissions": 
 	{
 		
