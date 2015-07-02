@@ -2,7 +2,7 @@
 
 Mstsc.js is pure javascript Microsoft RDP (Remote Desktop Client) client using nodejs, [**node-rdp**](https://github.com/citronneur/node-rdp) and socket.io. It allows you to connect to any terminal server compatible application, through web browser (optimized for Firefox).
 
-[[./img/mstsc.js.login.png|width=300px]]
+![](./img/mstsc.js.login.png)
 
 ![](./img/mstsc.js.connect.png)
 
