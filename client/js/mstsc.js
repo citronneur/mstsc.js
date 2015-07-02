@@ -3,7 +3,7 @@
  *
  * This file is part of mstsc.js.
  *
- * node-rdp is free software: you can redistribute it and/or modify
+ * mstsc.j is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -19,14 +19,24 @@
 
 (function() {
 
+	/**
+	 * Use for domain declaration
+	 */
 	Mstsc = function () {
 	}
 	
 	Mstsc.prototype = {
+		// shortcut
 		$ : function (id) {
 			return document.getElementById(id);
 		},
-		getOffset : function (el) {
+		
+		/**
+		 * Compute screen offset for a target element
+		 * @param el {DOM element}
+		 * @return {top : {integer}, left {integer}}
+		 */
+		elementOffset : function (el) {
 		    var x = 0;
 		    var y = 0;
 		    while (el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop )) {

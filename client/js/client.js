@@ -18,6 +18,10 @@
  */
 
 (function() {
+	/**
+	 * Mouse button mapping
+	 * @param button {integer} client button number
+	 */
 	function mouseButtonMap(button) {
 		switch(button) {
 		case 0:
@@ -29,19 +33,36 @@
 		}
 	};
 	
+	/**
+	 * Mstsc client
+	 * Input client connection (mouse and keyboard)
+	 * bitmap processing
+	 * @param canvas {canvas} rendering element
+	 */
 	function Client(canvas) {
 		this.canvas = canvas;
+		// create renderer
 		this.render = new Mstsc.Canvas.create(this.canvas); 
 		this.socket = null;
 	}
 	
 	Client.prototype = {
+		/**
+		 * connect
+		 * @param ip {string} ip target for rdp
+		 * @param domain {string} microsoft domain
+		 * @param username {string} session username
+		 * @param password {string} session password
+		 * @param next {function} asynchrone end callback
+		 */
 		connect : function (ip, domain, username, password, next) {
+			// compute socket.io path (cozy cloud integration)
 			var parts = document.location.pathname.split('/')
 		      , base = parts.slice(0, parts.length - 1).join('/') + '/'
 		      , path = base + 'socket.io';
 			
 			
+			// start connection
 			var self = this;
 			this.socket = io(window.location.protocol + "//" + window.location.host, { "path": path }).on('connect', function() {
 				console.log('[mstsc.js] connected');''
@@ -50,28 +71,27 @@
 					if (!self.socket) {
 						return;
 					}
-					var offset = Mstsc.getOffset(self.canvas);
+					var offset = Mstsc.elementOffset(self.canvas);
 					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, 0, false);
 				});
-				
 				self.canvas.addEventListener('mousedown', function (e) {
 					if (!self.socket) {
 						return;
 					}
-					var offset = Mstsc.getOffset(self.canvas);
+					var offset = Mstsc.elementOffset(self.canvas);
 					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), true);
 					e.preventDefault();
 				});
-				
 				self.canvas.addEventListener('mouseup', function (e) {
 					if (!self.socket) {
 						return;
 					}
-					var offset = Mstsc.getOffset(self.canvas);
+					var offset = Mstsc.elementOffset(self.canvas);
 					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), false);
 					e.preventDefault();
 				});
 				
+				// bind keyboard event
 				window.addEventListener('keydown', function (e) {
 					if (!self.socket) {
 						return;
@@ -84,7 +104,6 @@
 					}
 					
 				});
-				
 				window.addEventListener('keyup', function (e) {
 					if (!self.socket) {
 						return;
@@ -106,6 +125,7 @@
 				console.log('[mstsc.js] error : ' + err.code + '(' + err.message + ')');
 			});
 			
+			// emit infos event
 			this.socket.emit('infos', {ip : ip, port : 3389, screen : { width : this.canvas.width, height : this.canvas.height }, domain : domain, username : username, password : password});
 		}
 	}
