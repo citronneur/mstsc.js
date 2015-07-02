@@ -27,7 +27,7 @@
 		case 0:
 			return 1;
 		case 2:
-			return 3;
+			return 2;
 		default:
 			return 0;
 		}
@@ -73,6 +73,8 @@
 					}
 					var offset = Mstsc.elementOffset(self.canvas);
 					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, 0, false);
+					e.preventDefault();
+					return false;
 				});
 				self.canvas.addEventListener('mousedown', function (e) {
 					if (!self.socket) {
@@ -81,6 +83,7 @@
 					var offset = Mstsc.elementOffset(self.canvas);
 					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), true);
 					e.preventDefault();
+					return false;
 				});
 				self.canvas.addEventListener('mouseup', function (e) {
 					if (!self.socket) {
@@ -89,6 +92,42 @@
 					var offset = Mstsc.elementOffset(self.canvas);
 					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), false);
 					e.preventDefault();
+					return false;
+				});
+				self.canvas.addEventListener('contextmenu', function (e) {
+					if (!self.socket) {
+						return;
+					}
+					var offset = Mstsc.elementOffset(self.canvas);
+					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), false);
+					e.preventDefault();
+					return false;
+				});
+				self.canvas.addEventListener('DOMMouseScroll', function (e) {
+					if (!self.socket) {
+						return;
+					}
+					var isHorizontal = false;
+					var delta = e.detail;
+					var step = Math.round(Math.abs(delta) * 15 / 8);
+					
+					var offset = Mstsc.elementOffset(self.canvas);
+					self.socket.emit('wheel', e.clientX - offset.left, e.clientY - offset.top, step, delta > 0, isHorizontal);
+					e.preventDefault();
+					return false;
+				});
+				self.canvas.addEventListener('mousewheel', function (e) {
+					if (!self.socket) {
+						return;
+					}
+					var isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+					var delta = isHorizontal?e.deltaX:e.deltaY;
+					var step = Math.round(Math.abs(delta) * 15 / 8);
+					
+					var offset = Mstsc.elementOffset(self.canvas);
+					self.socket.emit('wheel', e.clientX - offset.left, e.clientY - offset.top, step, delta > 0, isHorizontal);
+					e.preventDefault();
+					return false;
 				});
 				
 				// bind keyboard event
@@ -102,7 +141,8 @@
 					else {
 						self.socket.emit('unicode', e.keyCode, true);
 					}
-					
+					e.preventDefault();
+					return false;
 				});
 				window.addEventListener('keyup', function (e) {
 					if (!self.socket) {
@@ -114,6 +154,8 @@
 					else {
 						self.socket.emit('unicode', e.keyCode, false);
 					}
+					e.preventDefault();
+					return false;
 				});
 			}).on('bitmap', function(bitmap) {
 				self.render.update(bitmap);

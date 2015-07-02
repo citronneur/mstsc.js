@@ -54,6 +54,11 @@ module.exports = function (server) {
 				return;
 			}
 			rdpClient.sendPointerEvent(x, y, button, isPressed);
+		}).on('wheel', function (x, y, step, isNegative, isHorizontal) {
+			if (!rdpClient) {
+				return;
+			}
+			rdpClient.sendWheelEvent(x, y, step, isNegative, isHorizontal);
 		}).on('scancode', function (code, isPressed) {
 			if (!rdpClient) {
 				return;
