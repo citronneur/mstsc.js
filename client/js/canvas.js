@@ -19,6 +19,10 @@
 
 (function() {
 	
+	/**
+	 * decompress bitmap from RLE algorithm
+	 * @param	bitmap	{object} bitmap object of bitmap event of node-rdp
+	 */
 	function decompress (bitmap) {
 		var fName = null;
 		switch (bitmap.bitsPerPixel) {
@@ -55,9 +59,6 @@
 		);
 		
 		var output = new Uint8ClampedArray(outputHeap.buffer, outputHeap.byteOffset, ouputSize);
-		//var imageData = this.ctx.createImageData(bitmap.width, bitmap.height);
-		//imageData.data.set(output);
-		//this.ctx.putImageData(imageData, bitmap.destLeft, bitmap.destTop);
 		
 		Module._free(inputPtr);
 		Module._free(outputPtr);
@@ -65,23 +66,36 @@
 		return output;
 	}
 
+	/**
+	 * Canvas renderer
+	 * @param canvas {canvas} use for rendering
+	 */
 	function Canvas(canvas) {
 		this.canvas = canvas;
 		this.ctx = canvas.getContext("2d");
 	}
 	
 	Canvas.prototype = {
+		/**
+		 * update canvas with new bitmap
+		 * @param bitmap {object}
+		 */
 		update : function (bitmap) {
 			var output = new Uint8ClampedArray(bitmap.data);
 			if (bitmap.isCompress) {
 				output = decompress(bitmap);
 			}
+			
+			// use image data to use asm.js
 			var imageData = this.ctx.createImageData(bitmap.width, bitmap.height);
 			imageData.data.set(output);
 			this.ctx.putImageData(imageData, bitmap.destLeft, bitmap.destTop);
 		}
 	}
 	
+	/**
+	 * Module export
+	 */
 	Mstsc.Canvas = {
 		create : function (canvas) {
 			return new Canvas(canvas);

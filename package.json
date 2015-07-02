@@ -7,7 +7,7 @@
 	],
 
 	"description": "A Remote Desktop Protocol Client written in javascript",
-	"license": "MIT",
+	"license": "GPL",
 	"repository": 
 	{
 		"type": "git",
