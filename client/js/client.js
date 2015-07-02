@@ -64,7 +64,7 @@
 			
 			// start connection
 			var self = this;
-			this.socket = io(window.location.protocol + "//" + window.location.host, { "path": path }).on('connect', function() {
+			this.socket = io(window.location.protocol + "//" + window.location.host, { "path": path }).on('rdp-connect', function() {
 				console.log('[mstsc.js] connected');''
 				// bind mouse move event
 				self.canvas.addEventListener('mousemove', function (e) {
@@ -157,12 +157,12 @@
 					e.preventDefault();
 					return false;
 				});
-			}).on('bitmap', function(bitmap) {
+			}).on('rdp-bitmap', function(bitmap) {
 				self.render.update(bitmap);
-			}).on('close', function() {
+			}).on('rdp-close', function() {
 				next(null);
 				console.log('[mstsc.js] close');
-			}).on('error', function (err) {
+			}).on('rdp-error', function (err) {
 				next(err);
 				console.log('[mstsc.js] error : ' + err.code + '(' + err.message + ')');
 			});
