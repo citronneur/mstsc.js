@@ -41,13 +41,13 @@ module.exports = function (server) {
 				autoLogin : true,
 				screen : infos.screen
 			}).on('connect', function () {
-				client.emit('connect');
+				client.emit('rdp-connect');
 			}).on('bitmap', function(bitmap) {
-				client.emit('bitmap', bitmap);
+				client.emit('rdp-bitmap', bitmap);
 			}).on('close', function() {
-				client.emit('close');
+				client.emit('rdp-close');
 			}).on('error', function(err) {
-				client.emit('error', err);
+				client.emit('rdp-error', err);
 			}).connect(infos.ip, infos.port);
 		}).on('mouse', function (x, y, button, isPressed) {
 			if (!rdpClient) {
