@@ -44,6 +44,7 @@
 		// create renderer
 		this.render = new Mstsc.Canvas.create(this.canvas); 
 		this.socket = null;
+		this.connected = false;
 	}
 	
 	Client.prototype = {
@@ -65,48 +66,47 @@
 			// start connection
 			var self = this;
 			this.socket = io(window.location.protocol + "//" + window.location.host, { "path": path }).on('rdp-connect', function() {
-				console.log('[mstsc.js] connected');''
+				// this event can be occured twice (RDP protocol stack artefact)
+				if (this.connected) return;
+				this.connected = true;
+				
+				console.log('[mstsc.js] connected');
 				// bind mouse move event
 				self.canvas.addEventListener('mousemove', function (e) {
-					if (!self.socket) {
-						return;
-					}
+					if (!self.socket) return;
+					
 					var offset = Mstsc.elementOffset(self.canvas);
 					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, 0, false);
 					e.preventDefault();
 					return false;
 				});
 				self.canvas.addEventListener('mousedown', function (e) {
-					if (!self.socket) {
-						return;
-					}
+					if (!self.socket) return;
+					
 					var offset = Mstsc.elementOffset(self.canvas);
 					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), true);
 					e.preventDefault();
 					return false;
 				});
 				self.canvas.addEventListener('mouseup', function (e) {
-					if (!self.socket) {
-						return;
-					}
+					if (!self.socket) return;
+					
 					var offset = Mstsc.elementOffset(self.canvas);
 					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), false);
 					e.preventDefault();
 					return false;
 				});
 				self.canvas.addEventListener('contextmenu', function (e) {
-					if (!self.socket) {
-						return;
-					}
+					if (!self.socket) return;
+					
 					var offset = Mstsc.elementOffset(self.canvas);
 					self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), false);
 					e.preventDefault();
 					return false;
 				});
 				self.canvas.addEventListener('DOMMouseScroll', function (e) {
-					if (!self.socket) {
-						return;
-					}
+					if (!self.socket) return;
+					
 					var isHorizontal = false;
 					var delta = e.detail;
 					var step = Math.round(Math.abs(delta) * 15 / 8);
@@ -117,9 +117,8 @@
 					return false;
 				});
 				self.canvas.addEventListener('mousewheel', function (e) {
-					if (!self.socket) {
-						return;
-					}
+					if (!self.socket) return;
+					
 					var isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
 					var delta = isHorizontal?e.deltaX:e.deltaY;
 					var step = Math.round(Math.abs(delta) * 15 / 8);
@@ -132,9 +131,8 @@
 				
 				// bind keyboard event
 				window.addEventListener('keydown', function (e) {
-					if (!self.socket) {
-						return;
-					}
+					if (!self.socket) return;
+					
 					if (e.code) {
 						self.socket.emit('scancode', Mstsc.keyboard.keyMap[e.code], true);
 					}
@@ -145,9 +143,8 @@
 					return false;
 				});
 				window.addEventListener('keyup', function (e) {
-					if (!self.socket) {
-						return;
-					}
+					if (!self.socket) return;
+					
 					if (e.code) {
 						self.socket.emit('scancode', Mstsc.keyboard.keyMap[e.code], false);
 					}
