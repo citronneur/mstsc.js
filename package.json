@@ -18,7 +18,8 @@
 	"dependencies": 
 	{
 		"express": "4.x.x",
-		"socket.io": "1.3.x"
+		"socket.io": "1.3.x",
+		"node-rdpjs": "0.1.1"
 	},
 	"scripts": {
 		"start": "node server.js"
