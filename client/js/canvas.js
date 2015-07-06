@@ -21,7 +21,7 @@
 	
 	/**
 	 * decompress bitmap from RLE algorithm
-	 * @param	bitmap	{object} bitmap object of bitmap event of node-rdp
+	 * @param	bitmap	{object} bitmap object of bitmap event of node-rdpjs
 	 */
 	function decompress (bitmap) {
 		var fName = null;

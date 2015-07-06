@@ -17,7 +17,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var rdp = require('rdp');
+var rdp = require('node-rdpjs');
 
 /**
  * Create proxy between rdp layer and socket io

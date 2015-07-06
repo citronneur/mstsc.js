@@ -2,7 +2,7 @@
 
 ![Mstsc.js Logo](./client/img/mstsc.js.png)
 
-**Mstsc.js** is pure javascript Microsoft RDP (Remote Desktop Client) client using nodejs, [**node-rdp**](https://github.com/citronneur/node-rdp) and socket.io. It allows you to connect to any terminal server compatible application, through web browser (optimized for firefox, compatible with chrome and internet explorer 11).
+**Mstsc.js** is pure javascript Microsoft RDP (Remote Desktop Client) client using nodejs, [**node-rdpjs**](https://github.com/citronneur/node-rdpjs) and socket.io. It allows you to connect to any terminal server compatible application, through web browser (optimized for firefox, compatible with chrome and internet explorer 11).
 
 ![](./img/mstsc.js.login.png)
 
@@ -46,6 +46,6 @@ Frontend application use socket.io and canvas for binding with mstsc.js backend.
 
 ### Backend
 
-Backend application use nodejs, express and socket.io as web server. Main goal of backend is be a proxy betwwen web browser and terminal server. It use [**node-rdp**](https://github.com/citronneur/node-rdp) for rdp client.
+Backend application use nodejs, express and socket.io as web server. Main goal of backend is be a proxy betwwen web browser and terminal server. It use [**node-rdpjs**](https://github.com/citronneur/node-rdpjs) for rdp client.
 
 
