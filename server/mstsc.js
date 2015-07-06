@@ -50,9 +50,8 @@ module.exports = function (server) {
 				client.emit('rdp-error', err);
 			}).connect(infos.ip, infos.port);
 		}).on('mouse', function (x, y, button, isPressed) {
-			if (!rdpClient) {
-				return;
-			}
+			if (!rdpClient)  return;
+
 			rdpClient.sendPointerEvent(x, y, button, isPressed);
 		}).on('wheel', function (x, y, step, isNegative, isHorizontal) {
 			if (!rdpClient) {
@@ -60,19 +59,16 @@ module.exports = function (server) {
 			}
 			rdpClient.sendWheelEvent(x, y, step, isNegative, isHorizontal);
 		}).on('scancode', function (code, isPressed) {
-			if (!rdpClient) {
-				return;
-			}
+			if (!rdpClient) return;
+
 			rdpClient.sendKeyEventScancode(code, isPressed);
 		}).on('unicode', function (code, isPressed) {
-			if (!rdpClient) {
-				return;
-			}
+			if (!rdpClient) return;
+
 			rdpClient.sendKeyEventUnicode(code, isPressed);
 		}).on('disconnect', function() {
-			if(!rdpClient) {
-				return;
-			}
+			if(!rdpClient) return;
+
 			rdpClient.close();
 		});
 	});

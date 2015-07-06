@@ -45,6 +45,26 @@
 		        el = el.offsetParent;
 		    }
 		    return { top: y, left: x };
+		},
+		
+		/**
+		 * Try to detect browser
+		 * @returns {String} [firefox|chrome|ie]
+		 */
+		browser : function () {
+			if (typeof InstallTrigger !== 'undefined') {
+				return 'firefox';
+			}
+			
+			if (!!window.chrome) {
+				return 'chrome';
+			}
+			
+			if (!!document.docuemntMode) {
+				return 'ie';
+			}
+			
+			return null;
 		}
 	}
 	
