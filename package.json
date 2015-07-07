@@ -1,33 +1,26 @@
 {
 	"name": "mstsc.js",
-	"version": "0.1.0",
+	"author": "Sylvain Peyrefitte",
+	"version": "0.2.0",
 	"engines": 
 	[
 		"node = 0.10.x"
 	],
-
 	"description": "A Remote Desktop Protocol Client written in javascript",
 	"license": "GPL",
-	"repository": 
-	{
+	"repository": {
 		"type": "git",
 		"url": "https://github.com/citronneur/mstsc.js"
 	},
-
 	"main": "server.js",
-	"dependencies": 
-	{
+	"dependencies": {
 		"express": "4.x.x",
 		"socket.io": "1.3.x",
-		"node-rdpjs": "0.1.1"
+		"node-rdpjs": "0.2.0"
 	},
 	"scripts": {
 		"start": "node server.js"
 	},
-	"cozy-permissions": 
-	{
-		
-	},
-
+	"cozy-permissions": {},
 	"cozy-displayName": "Mstsc.js"
 }

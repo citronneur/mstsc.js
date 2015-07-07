@@ -39,7 +39,9 @@ module.exports = function (server) {
 				password : infos.password,
 				enablePerf : true,
 				autoLogin : true,
-				screen : infos.screen
+				screen : infos.screen,
+				locale : infos.locale,
+				logLevel : process.argv[2] || 'INFO'
 			}).on('connect', function () {
 				client.emit('rdp-connect');
 			}).on('bitmap', function(bitmap) {

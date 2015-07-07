@@ -160,7 +160,18 @@
 			});
 			
 			// emit infos event
-			this.socket.emit('infos', {ip : ip, port : 3389, screen : { width : this.canvas.width, height : this.canvas.height }, domain : domain, username : username, password : password});
+			this.socket.emit('infos', {
+				ip : ip, 
+				port : 3389, 
+				screen : { 
+					width : this.canvas.width, 
+					height : this.canvas.height 
+				}, 
+				domain : domain, 
+				username : username, 
+				password : password, 
+				locale : Mstsc.locale()
+			});
 		}
 	}
 	

@@ -65,6 +65,14 @@
 			}
 			
 			return null;
+		},
+		
+		/**
+		 * Try to detect language
+		 * @returns
+		 */
+		locale : function () {
+			return window.navigator.userLanguage || window.navigator.language;
 		}
 	}
 	
