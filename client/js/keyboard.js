@@ -170,7 +170,7 @@
  	 	"MediaSelect" : 0xE06D
 	};
 	
-	UnicodeToCodeFirefox_FR = {
+	var UnicodeToCodeFirefox_FR = {
 		27 : "Escape",
 		112 : "F1",
 		113 : "F2",
@@ -275,7 +275,7 @@
 		17 : "ControlLeft"
 	};
 	
-	UnicodeToCodeChrome_FR = {
+	var UnicodeToCodeChrome_FR = {
 		27 : "Escape",
 		112 : "F1",
 		113 : "F2",
@@ -380,13 +380,117 @@
 		17 : "ControlLeft"
 	};
 	
-	UnicodeToCode = {
+	var UnicodeToCode_EN = {
+		27 : "Escape",
+		112 : "F1",
+		113 : "F2",
+		114 : "F3",
+		115 : "F4",
+		116 : "F5",
+		117 : "F6",
+		118 : "F7",
+		119 : "F8",
+		120 : "F9",
+		121 : "F10",
+		122 : "F11",
+		123 : "F12",
+		192 : "Backquote",
+		49 : "Digit1",
+		50 : "Digit2",
+		51 : "Digit3",
+		52 : "Digit4",
+		53 : "Digit5",
+		54 : "Digit6",
+		55 : "Digit7",
+		56 : "Digit8",
+		57 : "Digit9",
+		48 : "Digit0",
+		173 : "Minus",
+		61 : "Equal",
+		8 : "Backspace",
+		9 : "Tab",
+		81 : "KeyQ",
+		87 : "KeyW",
+		69 : "KeyE",
+		82 : "KeyR",
+		84 : "KeyT",
+		89 : "KeyY",
+		85 : "KeyU",
+		73 : "KeyI",
+		79 : "KeyO",
+		80 : "KeyP",
+		219 : "BracketLeft",
+		221 : "BracketRight",
+		13 : "Enter",
+		20 : "CapsLock",
+		65 : "KeyA",
+		83 : "KeyS",
+		68 : "KeyD",
+		70 : "KeyF",
+		71 : "KeyG",
+		72 : "KeyH",
+		74 : "KeyJ",
+		75 : "KeyK",
+		76 : "KeyL",
+		59 : "Semicolon",
+		222 : "Quote",
+		220 : "Backslash",
+		16 : "ShiftLeft",
+		220 : "IntlBackslash",
+		90 : "KeyZ",
+		88 : "KeyX",
+		67 : "KeyC",
+		86 : "KeyV",
+		66 : "KeyB",
+		78 : "KeyN",
+		77 : "KeyM",
+		188 : "Comma",
+		190 : "Period",
+		191 : "Slash",
+		16 : "ShiftRight",
+		17 : "ControlLeft",
+		18 : "AltLeft",
+		91 : "OSLeft",
+		32 : "Space",
+		18 : "AltRight",
+		91 : "OSRight",
+		93 : "ContextMenu",
+		17 : "ControlRight",
+		37 : "ArrowLeft",
+		38 : "ArrowUp",
+		40 : "ArrowDown",
+		39 : "ArrowRight",
+		144 : "NumLock",
+		144 : "NumLock",
+		111 : "NumpadDivide",
+		106 : "NumpadMultiply",
+		109 : "NumpadSubtract",
+		103 : "Numpad7",
+		104 : "Numpad8",
+		105 : "Numpad9",
+		107 : "NumpadAdd",
+		100 : "Numpad4",
+		101 : "Numpad5",
+		102 : "Numpad6",
+		97 : "Numpad1",
+		98 : "Numpad2",
+		99 : "Numpad3",
+		13 : "NumpadEnter",
+		96 : "Numpad0",
+		110 : "NumpadDecimal",
+		17 : "ControlLeft"	
+	};
+	
+	
+	var UnicodeToCode = {
 		'firefox' : {
-			'fr' : UnicodeToCodeFirefox_FR
+			'fr' : UnicodeToCodeFirefox_FR,
+			'en' : UnicodeToCode_EN
 		},
 		
 		'chrome' : {
-			'fr' : UnicodeToCodeChrome_FR
+			'fr' : UnicodeToCodeChrome_FR,
+			'en' : UnicodeToCode_EN
 		}
 	}
 	
@@ -396,7 +500,9 @@
 	 * @return {integer} scancode
 	 */
 	function scancode (e) {
-		return KeyMap[e.code || UnicodeToCode[Mstsc.browser() || 'firefox']['fr'][e.keyCode]];
+		var locale = Mstsc.locale();
+		locale = (['fr', 'en'].indexOf(locale) > 0 && locale) || 'en';
+		return KeyMap[e.code || UnicodeToCode[Mstsc.browser() || 'firefox'][locale][e.keyCode]];
 	}
 	
 	Mstsc.scancode = scancode;

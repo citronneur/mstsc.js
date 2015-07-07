@@ -47,15 +47,17 @@
 		var inputHeap = new Uint8Array(Module.HEAPU8.buffer, inputPtr, input.length);
 		inputHeap.set(input);
 		
-		var ouputSize = bitmap.width * bitmap.height * 4;
+		var output_width = bitmap.destRight - bitmap.destLeft + 1;
+		var output_height = bitmap.destBottom - bitmap.destTop + 1;
+		var ouputSize = output_width * output_height * 4;
 		var outputPtr = Module._malloc(ouputSize);
 
 		var outputHeap = new Uint8Array(Module.HEAPU8.buffer, outputPtr, ouputSize);
 
 		var res = Module.ccall(fName,
 			'number',
-			['number', 'number', 'number', 'number', 'number', 'number'],
-			[outputHeap.byteOffset, bitmap.width, bitmap.height, inputHeap.byteOffset, input.length]
+			['number', 'number', 'number', 'number', 'number', 'number', 'number', 'number'],
+			[outputHeap.byteOffset, output_width, output_height, bitmap.width, bitmap.height, inputHeap.byteOffset, input.length]
 		);
 		
 		var output = new Uint8ClampedArray(outputHeap.buffer, outputHeap.byteOffset, ouputSize);
@@ -63,7 +65,14 @@
 		Module._free(inputPtr);
 		Module._free(outputPtr);
 		
-		return output;
+		return { width : output_width, height : output_height, data : output };
+	}
+	
+	/**
+	 * Un compress bitmap are reverse in y axis
+	 */
+	function reverse (bitmap) {
+		return { width : bitmap.width, height : bitmap.height, data : new Uint8ClampedArray(bitmap.data) };
 	}
 
 	/**
@@ -81,14 +90,17 @@
 		 * @param bitmap {object}
 		 */
 		update : function (bitmap) {
-			var output = new Uint8ClampedArray(bitmap.data);
+			var output = null;
 			if (bitmap.isCompress) {
 				output = decompress(bitmap);
 			}
+			else {
+				output = reverse(bitmap);
+			}
 			
 			// use image data to use asm.js
-			var imageData = this.ctx.createImageData(bitmap.width, bitmap.height);
-			imageData.data.set(output);
+			var imageData = this.ctx.createImageData(output.width, output.height);
+			imageData.data.set(output.data);
 			this.ctx.putImageData(imageData, bitmap.destLeft, bitmap.destTop);
 		}
 	}
