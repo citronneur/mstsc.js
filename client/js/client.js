@@ -151,7 +151,7 @@
 				console.log('[mstsc.js] connected');
 				self.activeSession = true;
 			}).on('rdp-bitmap', function(bitmap) {
-				console.log('[mstsc.js] bitmap update');
+				console.log('[mstsc.js] bitmap update bpp : ' + bitmap.bitsPerPixel);
 				self.render.update(bitmap);
 			}).on('rdp-close', function() {
 				next(null);
