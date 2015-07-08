@@ -7,7 +7,7 @@
 		"node = 0.10.x"
 	],
 	"description": "A Remote Desktop Protocol Client written in javascript",
-	"license": "AGPL-3.0",
+	"license": "AGPL v3.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/citronneur/mstsc.js"
