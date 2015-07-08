@@ -44,6 +44,7 @@
 		// create renderer
 		this.render = new Mstsc.Canvas.create(this.canvas); 
 		this.socket = null;
+		this.activeSession = false;
 		this.install();
 	}
 	
@@ -56,7 +57,7 @@
 				
 				var offset = Mstsc.elementOffset(self.canvas);
 				self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, 0, false);
-				e.preventDefault();
+				e.preventDefault || !self.activeSession();
 				return false;
 			});
 			this.canvas.addEventListener('mousedown', function (e) {
@@ -68,7 +69,7 @@
 				return false;
 			});
 			this.canvas.addEventListener('mouseup', function (e) {
-				if (!self.socket) return;
+				if (!self.socket || !self.activeSession) return;
 				
 				var offset = Mstsc.elementOffset(self.canvas);
 				self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), false);
@@ -76,7 +77,7 @@
 				return false;
 			});
 			this.canvas.addEventListener('contextmenu', function (e) {
-				if (!self.socket) return;
+				if (!self.socket || !self.activeSession) return;
 				
 				var offset = Mstsc.elementOffset(self.canvas);
 				self.socket.emit('mouse', e.clientX - offset.left, e.clientY - offset.top, mouseButtonMap(e.button), false);
@@ -84,7 +85,7 @@
 				return false;
 			});
 			this.canvas.addEventListener('DOMMouseScroll', function (e) {
-				if (!self.socket) return;
+				if (!self.socket || !self.activeSession) return;
 				
 				var isHorizontal = false;
 				var delta = e.detail;
@@ -96,7 +97,7 @@
 				return false;
 			});
 			this.canvas.addEventListener('mousewheel', function (e) {
-				if (!self.socket) return;
+				if (!self.socket || !self.activeSession) return;
 				
 				var isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
 				var delta = isHorizontal?e.deltaX:e.deltaY;
@@ -110,7 +111,7 @@
 			
 			// bind keyboard event
 			window.addEventListener('keydown', function (e) {
-				if (!self.socket) return;
+				if (!self.socket || !self.activeSession) return;
 				
 				self.socket.emit('scancode', Mstsc.scancode(e), true);
 
@@ -118,7 +119,7 @@
 				return false;
 			});
 			window.addEventListener('keyup', function (e) {
-				if (!self.socket) return;
+				if (!self.socket || !self.activeSession) return;
 				
 				self.socket.emit('scancode', Mstsc.scancode(e), false);
 				
@@ -148,15 +149,18 @@
 			this.socket = io(window.location.protocol + "//" + window.location.host, { "path": path }).on('rdp-connect', function() {
 				// this event can be occured twice (RDP protocol stack artefact)
 				console.log('[mstsc.js] connected');
+				self.activeSession = true;
 			}).on('rdp-bitmap', function(bitmap) {
 				console.log('[mstsc.js] bitmap update');
 				self.render.update(bitmap);
 			}).on('rdp-close', function() {
 				next(null);
 				console.log('[mstsc.js] close');
+				self.activeSession = false;
 			}).on('rdp-error', function (err) {
 				next(err);
 				console.log('[mstsc.js] error : ' + err.code + '(' + err.message + ')');
+				self.activeSession = false;
 			});
 			
 			// emit infos event
