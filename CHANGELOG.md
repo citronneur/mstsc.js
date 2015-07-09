@@ -1,4 +1,7 @@
-## 0.2.1 - 20150708
+## 0.2.3 - 20150709
+* Fix major bug on 32 bpp image decompression
+
+## 0.2.2 - 20150708
 * Fix bug on freeze event after close event
 * Remove border of canvas
 * Add better favicon
