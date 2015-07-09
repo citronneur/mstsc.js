@@ -955,6 +955,21 @@ bitmap_decompress_24(uint8 * output, int output_width, int output_height, int in
 }
 
 int
-bitmap_decompress_32(uint8 * output, int width, int height, uint8* input, int size) {
-	return bitmap_decompress4(output, width, height, input, size);
+bitmap_decompress_32(uint8 * output, int output_width, int output_height, int input_width, int input_height, uint8* input, int size) {
+	uint8 * temp = (uint8*)malloc(input_width * input_height * 4);
+	RD_BOOL rv = bitmap_decompress4(temp, input_width, input_height, input, size);
+
+	// convert to rgba
+	for (int y = 0; y < output_height; y++) {
+		for (int x = 0; x < output_width; x++) {
+			uint8 r = temp[(y * input_width + x) * 4];
+			uint8 g = temp[(y * input_width + x) * 4 + 1];
+			uint8 b = temp[(y * input_width + x) * 4 + 2];
+			uint8 a = temp[(y * input_width + x) * 4 + 3];
+			((uint32*)output)[y * output_width + x] = 0xff << 24 | r << 16 | g << 8 | b;
+		}
+	}
+	free(temp);
+
+	return rv;
 }
