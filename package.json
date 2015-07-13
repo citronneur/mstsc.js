@@ -22,5 +22,6 @@
 		"start": "node server.js"
 	},
 	"cozy-permissions": {},
-	"cozy-displayName": "Mstsc.js"
+	"cozy-displayName": "Mstsc.js",
+	"icon-path": "client/img/mstsc.js.svg"
 }
