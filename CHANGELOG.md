@@ -1,3 +1,6 @@
+## 0.2.4 - 20150715
+* Best integration in Cozy-Cloud
+
 ## 0.2.3 - 20150709
 * Fix major bug on 32 bpp image decompression
 
