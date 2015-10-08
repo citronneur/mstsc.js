@@ -36,6 +36,7 @@ cd mstsc.js
 npm install
 node server.js
 ```
+Open [http://localhost:9250](http://localhost:9250) in your browser.
 
 ## How does it works ?
 
