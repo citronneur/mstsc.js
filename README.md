@@ -32,6 +32,7 @@ Install last dev commit :
 
 ```
 git clone https://github.com/citronneur/mstsc.js
+cd mstsc.js
 npm install
 node server.js
 ```
