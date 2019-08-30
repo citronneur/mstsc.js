@@ -1,0 +1,1 @@
+docker build -f docker/Dockerfile -t mstscjs:0.2.4 .
