@@ -1,0 +1,1 @@
+docker run -p 9250:9250 mstscjs:0.1.0 node server.js
