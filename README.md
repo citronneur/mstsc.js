@@ -37,7 +37,7 @@ npm install
 node server.js
 ```
 
-## How does it works ?
+## How does it work?
 
 ### Frontend
 
